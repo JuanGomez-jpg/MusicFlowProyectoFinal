@@ -51,6 +51,12 @@
                     <input type="text" id="genre" name="genre" class="form-control" value="{{ old('genre') ?? $album -> genre }}" />
                 </div>
 
+                <!-- Text input -->
+                <div class="form-field col-lg-6">
+                    <label class="form-label" for="description">Descripción</label>
+                    <input type="text" class="form-control" id="description" name="description" value="{{ old('description') ?? $album -> description }}"></input>
+                </div>
+
                 <!-- File input -->
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="coverImg">Cover</label>
@@ -58,7 +64,7 @@
                 </div>
                 <br>
 
-                            <!-- <img id="output" style="display: block;" src="data:image/jpeg;base64,{{ base64_encode($album -> coverName) }}" alt="img" width="300" height="300" /> -->
+                <!-- <img id="output" style="display: block;" src="data:image/jpeg;base64,{{ base64_encode($album -> coverName) }}" alt="img" width="300" height="300" /> -->
                 <img id="output" style="display: block;" src="{{ asset('storage/images/'.$album->coverImg) }}" alt="{{ $album->coverImg }}" height="300" width="300" />
                 <br>
                 <!-- Submit button -->

@@ -20,6 +20,6 @@ class AlbumsSeeder extends Seeder
             'coverImg' => ''
         ]);*/
 
-        \App\Models\Albums::factory(2)->create();
+        \App\Models\Albums::factory(20)->create();
     }
 }

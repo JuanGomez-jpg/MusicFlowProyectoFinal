@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Albums;
+use App\Models\Song;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Image;
 use File;
@@ -15,7 +17,16 @@ class AlbumsController extends Controller
     public function index()
     {
         $albums = Albums::all();
-        return response(view('albums.album', compact('albums')));
+        $user = Auth::user();
+
+        /*$albums = Albums::find(1);
+        $cancion1 = new Song(['name' => 'The Battle of Yaldabaoth', 'duration' => '280']);
+        $cancion2 = new Song(['name' => 'Childchewer', 'duration' => '240']);
+        $albums->songs()->saveMany([$cancion1, $cancion2]);*/
+
+        return response(view('albums.album',[
+            'albums' => $albums,
+            'user' => $user]));
     }
 
     /**
@@ -52,13 +63,15 @@ class AlbumsController extends Controller
             $albums->coverName = $imageData;
         }*/
 
+    
         //Validation storage
         $request->validate([
             'albumName' => 'required|max:70',
             'artistName' => 'required|max:50',
             'year' => 'required|integer|min:1500|max:2023',
             'genre' => 'required|max:50',
-            'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|max:200'
         ]);
 
 
@@ -68,6 +81,7 @@ class AlbumsController extends Controller
         $albums->artistName = $request->artistName;
         $albums->year = $request->year;
         $albums->genre = $request->genre;
+        $albums->description = $request->description;
 
         if ($request->hasFile('coverImg'))
         {
@@ -89,7 +103,13 @@ class AlbumsController extends Controller
      */
     public function show(Albums $album)
     {
-        return view('albums.album-details', compact('album'));
+        $user = Auth::user();
+        $songs = Song::get();
+        return view('albums.album-details', [
+            'album' => $album,
+            'user' => $user,
+            'songs' => $songs
+        ]);
     }
 
     /**
@@ -131,13 +151,15 @@ class AlbumsController extends Controller
             'artistName' => 'required|max:50',
             'year' => 'required|integer|min:1500|max:2023',
             'genre' => 'required|max:50',
-            'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|max:200'
         ]);
 
         $album->albumName = $request->albumName;
         $album->artistName = $request->artistName;
         $album->year = $request->year;
         $album->genre = $request->genre;
+        $album->description = $request->description;
 
         if ($request->hasFile('coverImg'))
         {

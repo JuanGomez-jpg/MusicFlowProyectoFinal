@@ -24,26 +24,7 @@
                         @endforeach
                     </ul>
             @endif
-<!--
-            <label for="albumName">Nombre</label><br>
-            <input type="text" name="albumName" id="albumName" value="{{ old('albumName') }}">
-            <br>
-            <label for="artistName">Nombre del artista</label><br>
-            <input type="text" name="artistName" id="artistName" value="{{ old('artistName') }}">
-            <br>
-            <label for="year">Año</label><br>
-            <input type="number" name="year" id="year" value="{{ old('year') }}">
-            <br>
-            <label for="genre">Género</label><br>
-            <input type="text" name="genre" id="genre" value="{{ old('genre') }}">
-            <br>
-            <label for="coverImg">Cover</label><br>
-            <input type="file" name="coverImg" id="coverImg" onChange="loadFile(event)">
-            <br>
-            <img id="output" width="300" height="300" />
-            <br>
-            <input type="submit" id="Boton" value="Guardar">
--->
+
             <div class="container mt-5">
                 <h1 class="title">Create album</h1>
 
@@ -67,6 +48,12 @@
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="genre">Género</label>
                     <input type="text" id="genre" name="genre" class="form-control" value="{{ old('genre') }}" />
+                </div>
+
+                <!-- TextArea -->
+                <div class="form-field col-lg-6">
+                    <label class="form-label" for="description">Descripción</label>
+                    <input type="text" class="form-control" id="description" name="description"></input>
                 </div>
 
                 <!-- File input -->

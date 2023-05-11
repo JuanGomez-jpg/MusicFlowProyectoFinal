@@ -60,11 +60,13 @@
   <div class="container mt-5">
     <h1 class="display-6">
       <strong>
-        Albums 
+        Albums · {{ $user -> name }}
       </strong>
-      <a href="/albums/create" class="btn btn-success">
-        Añadir
-      </a>
+      @if($user -> typeUser === 'Artista')
+        <a href="/albums/create" class="btn btn-success">
+          Añadir
+        </a>
+      @endif
     </h1>
     <br>
     <div class="row">
@@ -72,7 +74,7 @@
         <div class="col-md-3">
           <div class="card shadow p-3 mb-5 bg-white rounded">
             <div class="text-center">
-              <img src="{{ asset('storage/images/'.$al->coverImg) }}" class="mx-auto d-block" style="height: 150px; max-width: 150px;" />
+              <img src="{{ asset('storage/images/'.$al->coverImg) }}" class="mx-auto d-block img-fluid" style="height: auto; max-width: auto;" />
                 <div class="card-body" style="height: 7rem;">
                   <strong><h5 class="card-title">{{ $al -> albumName }}</h5></strong>
                   <p class="card-text">{{ $al -> artistName }}</p>

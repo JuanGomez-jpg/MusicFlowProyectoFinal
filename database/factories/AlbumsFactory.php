@@ -31,7 +31,8 @@ class AlbumsFactory extends Factory
             'artistName' => $this->faker->word(),
             'year' => $this->faker->numberBetween(1500, 2023),
             'genre' => $this->faker->word(),
-            'coverImg' => $imageName
+            'coverImg' => $imageName,
+            'description' => $this->faker->realText($maxNbChars = 100)
         ];
     }
 }

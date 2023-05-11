@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->string('albumName', 70);
-            $table->year('year');
+            $table->bigInteger('year');
             $table->string('genre', 50);
             $table->string('coverImg');
             //$table->binary('coverName');
             $table->string('artistName', 50);
+            $table->longText('description', 200);
             $table->timestamps();
         });
     }

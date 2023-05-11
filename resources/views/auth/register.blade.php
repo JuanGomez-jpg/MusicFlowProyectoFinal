@@ -20,6 +20,14 @@
             </div>
 
             <div class="mt-4">
+                <label for="typeUser">Tipo de usuario:</label><br>
+                <label for="typeUser">Normal:</label>
+                <input id="typeUserNormal" type="radio" name="typeUser" value="Normal" checked /><br>
+                <label for="typeUser">Artista:</label>
+                <input id="typeUserArtist" type="radio" name="typeUser" value="Artista" />
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
