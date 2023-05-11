@@ -17,37 +17,6 @@
 </head>
 <body>
   <x-navbarmain />
-<!--
-  <div class="container">
-    <div class="row">
-        <div class="d-flex justify-content-center">
-          <div class="card shadow p-3 mb-5 bg-white rounded">
-            <div class="text-center">
-              <img src="{{ asset('storage/images/'.$album->coverImg) }}" class="mx-auto d-block" style="max-width: 70%; height: auto;" />
-            </div>
-              <div class="card-body" style="height: 12rem;">
-                <p class="card-title">{{ $album -> albumName }}</p>
-                <p class="card-text">{{ $album -> artistName }}</p>
-                <p class="card-text">{{ $album -> year }}</p>
-                <p class="card-text">{{ $album -> genre }}</p>
-              </div>
-
-                <div class="card-footer bg-transparent">
-                  <div class="text-center">
-                    <a href="/albums" class="btn btn-primary">Inicio</a>
-                    <a href="/albums/{{ $album->id }}/edit"  class="btn btn-warning">Editar</a>
-                    <form action="{{ route('albums.destroy', $album) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                  </div>
-                </div>
-          </div>
-        </div>
-    </div>
-  </div>
--->
 
 <div class="container mt-5">
   <div class="row">
@@ -55,18 +24,23 @@
       <img src="{{ asset('storage/images/'.$album->coverImg) }}" class="mx-auto d-block img-fluid rounded" style="height: auto; max-width: auto;">
       
       @if($user -> typeUser !== 'Artista')
-      <div class="mt-3">
-        <a href="#" class="btn btn-outline-primary w-100">Comprar</a>
-      </div>
+        <div class="mt-3">
+          <a href="#" class="btn btn-outline-primary w-100">Comprar</a>
+        </div>
       @endif
-
+      
       <div class="mt-3">
         <a href="/albums" class="btn btn-primary w-100">Inicio</a><br>
       </div>
-      <div class="mt-3">
-        <a href="/albums/{{ $album->id }}/edit" class="btn btn-warning w-100">Editar</a>
-      </div>
+
+      @if($user -> typeUser === 'Artista')
+        <div class="mt-3">
+          <a href="/albums/{{ $album->id }}/edit" class="btn btn-warning w-100">Editar</a>
+        </div>
+      @endif
+
     </div>
+
     <div class="col-md-8">
       <br>
       <h3 class="text-primary display-6 mb-4">{{ $album -> albumName }}</h3>
@@ -75,8 +49,11 @@
 
       <h3 class="text-primary mb-4">Canciones del álbum</h3>
       <ul class="list-group mb-4">
-        @foreach($songs as $song)
-          <li class="list-group-item list-group-item-action">{{ $song -> name }}</li>
+        @foreach($album->songs as $song)
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ $song -> name }}
+            <h5><span class="badge bg-dark">{{ $song -> duration }}</span></h5>
+          </li>
         @endforeach
       </ul>
       <h3 class="text-primary mb-3">Descripción del álbum</h3>
@@ -84,6 +61,8 @@
         {{ $album -> description }}
       </div>
       <br>
+
+      @if($user -> typeUser === 'Artista')
       <div class="mb-3">
         <form action="{{ route('albums.destroy', $album) }}" method="POST">
           @csrf
@@ -91,6 +70,8 @@
           <button type="submit" class="btn btn-dark w-100">Eliminar</button>
         </form>
       </div>
+      @endif
+
     </div>
   </div>
 </div>

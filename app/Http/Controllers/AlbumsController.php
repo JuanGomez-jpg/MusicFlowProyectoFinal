@@ -6,6 +6,9 @@ use App\Models\Albums;
 use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
+use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
+
 use Image;
 use File;
 
@@ -20,8 +23,15 @@ class AlbumsController extends Controller
         $user = Auth::user();
 
         /*$albums = Albums::find(1);
-        $cancion1 = new Song(['name' => 'The Battle of Yaldabaoth', 'duration' => '280']);
-        $cancion2 = new Song(['name' => 'Childchewer', 'duration' => '240']);
+        $duracionEnSegundos = '280';
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+        
+        $cancion1 = new Song(['name' => 'The Battle of Yaldabaoth', 'duration' => $duracionEnMinutos]);
+
+        $duracionEnSegundos = 240;
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+
+        $cancion2 = new Song(['name' => 'Childchewer', 'duration' => $duracionEnMinutos]);
         $albums->songs()->saveMany([$cancion1, $cancion2]);*/
 
         return response(view('albums.album',[
@@ -104,7 +114,8 @@ class AlbumsController extends Controller
     public function show(Albums $album)
     {
         $user = Auth::user();
-        $songs = Song::get();
+        $songs = Song::all();
+
         return view('albums.album-details', [
             'album' => $album,
             'user' => $user,
