@@ -22,17 +22,33 @@ class AlbumsController extends Controller
         $albums = Albums::all();
         $user = Auth::user();
 
-        /*$albums = Albums::find(1);
-        $duracionEnSegundos = '280';
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-        
-        $cancion1 = new Song(['name' => 'The Battle of Yaldabaoth', 'duration' => $duracionEnMinutos]);
-
-        $duracionEnSegundos = 240;
+        /*$albums = Albums::find(4);
+        $duracionEnSegundos = '99';
         $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
 
-        $cancion2 = new Song(['name' => 'Childchewer', 'duration' => $duracionEnMinutos]);
-        $albums->songs()->saveMany([$cancion1, $cancion2]);*/
+        $cancion1 = new Song(['name' => 'The End!', 'duration' => $duracionEnMinutos]);
+
+        $duracionEnSegundos = 190;
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+
+        $cancion2 = new Song(['name' => 'Dead!', 'duration' => $duracionEnMinutos]);
+
+        $duracionEnSegundos = 215;
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+
+        $cancion3 = new Song(['name' => 'This is How I Disappear', 'duration' => $duracionEnMinutos]);
+
+        $duracionEnSegundos = 192;
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+
+        $cancion4 = new Song(['name' => 'The Sharpest Lives', 'duration' => $duracionEnMinutos]);
+
+        $duracionEnSegundos = 306;
+        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
+
+        $cancion4 = new Song(['name' => 'Welcome To The Black Parade', 'duration' => $duracionEnMinutos]);
+
+        $albums->songs()->saveMany([$cancion1, $cancion2, $cancion3, $cancion4]);*/
 
         return response(view('albums.album',[
             'albums' => $albums,

@@ -20,6 +20,10 @@
                     <a class="nav-link active" href="/albums">Inicio</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link active" href="/songs/create">Añadir canciones</a>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" 
                         href="#" 

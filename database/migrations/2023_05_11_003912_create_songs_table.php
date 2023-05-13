@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('songs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
-            $table->string('duration', 10);
+            $table->string('songName', 50);
+            $table->string('songDuration', 10);
+            $table->string('songLyrics', 2500);
         });
     }
 

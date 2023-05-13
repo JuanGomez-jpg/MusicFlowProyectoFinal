@@ -17,7 +17,7 @@
             @csrf
 
             @if ($errors -> any())
-                <div class="aler alert-danger">
+                <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors -> all() as $err)
                             <li> {{ $err }} </li>
@@ -27,12 +27,14 @@
 
             <div class="container mt-5">
                 <h1 class="title">Create album</h1>
-
+                
+                <!-- Text input -->
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="albumName">Nombre del album</label>
                     <input type="text" id="albumName" name="albumName" class="form-control" value="{{ old('albumName') }}" />
                 </div>
 
+                <!-- Text input -->
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="artistName">Nombre del artista</label>
                     <input type="text" id="artistName" name="artistName" class="form-control" value="{{ old('artistName') }}" />
@@ -50,7 +52,7 @@
                     <input type="text" id="genre" name="genre" class="form-control" value="{{ old('genre') }}" />
                 </div>
 
-                <!-- TextArea -->
+                <!-- Text input -->
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="description">Descripción</label>
                     <input type="text" class="form-control" id="description" name="description"></input>

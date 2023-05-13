@@ -48,14 +48,25 @@
       <p class="mb-4">{{ $album -> genre }} · {{ $album -> year }}</p>
 
       <h3 class="text-primary mb-4">Canciones del álbum</h3>
-      <ul class="list-group mb-4">
+      <ol class="list-group list-group-numbered mb-1">
         @foreach($album->songs as $song)
-          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
             {{ $song -> name }}
             <h5><span class="badge bg-dark">{{ $song -> duration }}</span></h5>
+           <!-- <div class="">
+              <a href="#" class="btn btn-danger">Eliminar</a>
+              <a href="#" class="btn btn-warning">Editar</a>
+            </div> -->
           </li>
         @endforeach
-      </ul>
+      </ol>
+
+      @if($user -> typeUser === 'Artista')
+        <div class="mb-3">
+          <a href="/albums/{{ $album->id }}/create-song" class="btn btn-success">Añadir</a><br>
+        </div>
+      @endif
+
       <h3 class="text-primary mb-3">Descripción del álbum</h3>
       <div class="" style="word-wrap: break-word;">
         {{ $album -> description }}

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Song;
+use App\Models\Albums;
 use Illuminate\Http\Request;
+
+use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
+
 
 class SongController extends Controller
 {
@@ -12,7 +16,10 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $songs = Song::all();
+
+        return response(view('songs.song', [
+            'songs' => $songs]));
     }
 
     /**
@@ -20,7 +27,7 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        return view('songs.create-song');
     }
 
     /**
@@ -28,7 +35,23 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'songName' => 'required|max:50',
+            'songDuration' => 'required|max:10',
+            'songLyrics' => 'required|max:2500'
+        ]);
+
+        $minutes = Carbon::createFromTimestamp($request->songDuration)->format('i:s');
+
+        // Storage
+        $songs = new Song();
+        $songs->songName = $request->songName;
+        $songs->songDuration = $minutes;
+        $songs->songLyrics = $request->songLyrics;
+
+        $songs->save();
+
+        return redirect('/songs');
     }
 
     /**
