@@ -64,3 +64,61 @@ hr {
   border: none;
   border-top: 1px solid #f5f5f5;
 }
+
+
+/* Select Album Details */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::before {
+  content: "\f078";
+  font-family: "FontAwesome";
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #495057;
+}
+
+.select-wrapper .form-control {
+  height: auto;
+  padding-top: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  background: #fff;
+}
+
+.select-wrapper .form-control:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.select-wrapper .form-control[multiple] option {
+  font-weight: normal;
+}
+
+.select-wrapper .form-control[multiple] option:checked {
+  font-weight: bold;
+}
+
+.select-wrapper .form-control[multiple] option:hover {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 576px) {
+  .select-wrapper::before {
+    content: "\f0d7";
+    font-family: "FontAwesome";
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #495057;
+  }
+}

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('albums_id')->constrained();
             $table->integer('song_id')->unsigned();
             $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');
+            $table->unique(['albums_id', 'song_id']);
         });
     }
 

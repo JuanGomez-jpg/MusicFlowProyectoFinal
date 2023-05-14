@@ -51,8 +51,8 @@
       <ol class="list-group list-group-numbered mb-1">
         @foreach($album->songs as $song)
           <li class="list-group-item d-flex justify-content-between align-items-start">
-            {{ $song -> name }}
-            <h5><span class="badge bg-dark">{{ $song -> duration }}</span></h5>
+            {{ $song -> songName }}
+            <h5><span class="badge bg-dark">{{ $song -> songDuration }}</span></h5>
            <!-- <div class="">
               <a href="#" class="btn btn-danger">Eliminar</a>
               <a href="#" class="btn btn-warning">Editar</a>
@@ -62,9 +62,22 @@
       </ol>
 
       @if($user -> typeUser === 'Artista')
-        <div class="mb-3">
-          <a href="/albums/{{ $album->id }}/create-song" class="btn btn-success">Añadir</a><br>
+      <form action="{{ route('albums.add-song', $album) }}" method="POST">
+        @csrf
+        <h3 class="text-primary mb-4">Agregar canción</h3>
+        <div class="form-group">
+          <div class="select-wrapper">
+            <select class="form-control custom-select mb-4" id="select-multiple" name="song_id[]" multiple>
+            @foreach ($songs as $song)
+              <option value="{{ $song -> id }}">{{ $song -> songName }}</option>
+            @endforeach
+            </select>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-success">Añadir</button><br>
+            </div>
+          </div>
         </div>
+      </form>
       @endif
 
       <h3 class="text-primary mb-3">Descripción del álbum</h3>

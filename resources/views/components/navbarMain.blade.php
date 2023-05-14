@@ -17,11 +17,17 @@
             <ul class="navbar-nav me-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/albums">Inicio</a>
+                    <a class="nav-link active" href="/albums">
+                    <i class="bi bi-house-fill"></i>
+                        Inicio
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/songs/create">Añadir canciones</a>
+                    <a class="nav-link active" href="/songs/create">
+                        <i class="bi bi-patch-plus-fill"></i>
+                        Añadir canciones
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -30,8 +36,9 @@
                         id="navbarDropdown" 
                         role="button" 
                         data-bs-toggle="dropdown" 
-                        aria-expanded="false"
-                        >Cuenta
+                        aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
+                        Cuenta
                     </a>
                     <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
                         <li>

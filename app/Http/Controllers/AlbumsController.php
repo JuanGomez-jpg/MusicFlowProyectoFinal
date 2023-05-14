@@ -130,7 +130,7 @@ class AlbumsController extends Controller
     public function show(Albums $album)
     {
         $user = Auth::user();
-        $songs = Song::all();
+        $songs = Song::get();
 
         return view('albums.album-details', [
             'album' => $album,
@@ -208,5 +208,18 @@ class AlbumsController extends Controller
     {
         $album -> delete();
         return redirect()->route('albums.index');
+    }
+
+    /**
+     * Adds song to an album
+     * 
+     * @param \Illuminate\Http\Request
+     * @param \App\Models\Albums
+     * @return \Illuminate\Http\Response
+     */
+    public function addSong(Request $request, Albums $album)
+    {
+        $album->songs()->attach($request->song_id);
+        return redirect()->route('albums.show', $album);
     }
 }

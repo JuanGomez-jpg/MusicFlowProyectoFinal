@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 //Route::resource('albums/{album}/create-song', [AlbumsController::class])->name('albums.create-song');
-//Route::get('albums/{albums}/create', [AlbumsController::class, 'create']);
 
+Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
 Route::resource('songs', SongController::class)->middleware('auth');
 Route::resource('albums', AlbumsController::class)->middleware('auth');
 //Route::get('albums/create', [AlbumsController::class, 'create']);
