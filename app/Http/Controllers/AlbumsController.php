@@ -19,9 +19,9 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        $albums = Albums::all();
+        //$albums = Albums::all();
         $user = Auth::user();
-
+        $albums = Auth::user()->albums()->get();
         return response(view('albums.album',[
             'albums' => $albums,
             'user' => $user]));
@@ -64,15 +64,14 @@ class AlbumsController extends Controller
     
         //Validation storage
         $request->validate([
-            'albumName' => 'required|max:70',
-            'artistName' => 'required|max:50',
+            'albumName' => 'required|min:2|max:70',
+            'artistName' => 'required|min:2|max:50',
             'year' => 'required|integer|min:1500|max:2023',
-            'genre' => 'required|max:50',
+            'genre' => 'required|min:4|max:50',
             'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required|max:200',
+            'description' => 'required|min:10|max:200',
             'price' => 'required|decimal:2'
         ]);
-
 
         // Storage
         $albums = new Albums();
@@ -90,11 +89,10 @@ class AlbumsController extends Controller
             $albums->coverImg = $filename;
         }
 
-
+        $user = Auth::user();
+        $albums->user_id = $user->id;
         $albums->save();
-        
-        //Albums::create($request->all());
-
+        //Albums::create($request->all());s
         return redirect('/albums');
     }
 
@@ -150,12 +148,12 @@ class AlbumsController extends Controller
 
         //Validation storage
         $request->validate([
-            'albumName' => 'required|max:70',
-            'artistName' => 'required|max:50',
+            'albumName' => 'required|min:2|max:70',
+            'artistName' => 'required|min:2|max:50',
             'year' => 'required|integer|min:1500|max:2023',
-            'genre' => 'required|max:50',
+            'genre' => 'required|min:4|max:50',
             'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required|max:200',
+            'description' => 'required|min:10|max:200',
             'price' => 'required|decimal:2'
         ]);
 

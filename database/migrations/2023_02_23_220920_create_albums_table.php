@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('artistName', 50);
             $table->longText('description', 200);
             $table->double('price', 8, 2);
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

@@ -36,9 +36,9 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'songName' => 'required|max:50',
+            'songName' => 'required|min:4|max:50',
             'songDuration' => 'required|max:10',
-            'songLyrics' => 'required|max:2500'
+            'songLyrics' => 'required|min:5|max:2500'
         ]);
 
         $minutes = Carbon::createFromTimestamp($request->songDuration)->format('i:s');
