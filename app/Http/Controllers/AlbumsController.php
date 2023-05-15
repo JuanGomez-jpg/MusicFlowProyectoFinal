@@ -22,34 +22,6 @@ class AlbumsController extends Controller
         $albums = Albums::all();
         $user = Auth::user();
 
-        /*$albums = Albums::find(4);
-        $duracionEnSegundos = '99';
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-
-        $cancion1 = new Song(['name' => 'The End!', 'duration' => $duracionEnMinutos]);
-
-        $duracionEnSegundos = 190;
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-
-        $cancion2 = new Song(['name' => 'Dead!', 'duration' => $duracionEnMinutos]);
-
-        $duracionEnSegundos = 215;
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-
-        $cancion3 = new Song(['name' => 'This is How I Disappear', 'duration' => $duracionEnMinutos]);
-
-        $duracionEnSegundos = 192;
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-
-        $cancion4 = new Song(['name' => 'The Sharpest Lives', 'duration' => $duracionEnMinutos]);
-
-        $duracionEnSegundos = 306;
-        $duracionEnMinutos = Carbon::createFromTimestamp($duracionEnSegundos)->format('i:s');
-
-        $cancion4 = new Song(['name' => 'Welcome To The Black Parade', 'duration' => $duracionEnMinutos]);
-
-        $albums->songs()->saveMany([$cancion1, $cancion2, $cancion3, $cancion4]);*/
-
         return response(view('albums.album',[
             'albums' => $albums,
             'user' => $user]));
@@ -97,7 +69,8 @@ class AlbumsController extends Controller
             'year' => 'required|integer|min:1500|max:2023',
             'genre' => 'required|max:50',
             'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required|max:200'
+            'description' => 'required|max:200',
+            'price' => 'required|decimal:2'
         ]);
 
 
@@ -108,6 +81,7 @@ class AlbumsController extends Controller
         $albums->year = $request->year;
         $albums->genre = $request->genre;
         $albums->description = $request->description;
+        $albums->price = $request->price;
 
         if ($request->hasFile('coverImg'))
         {
@@ -131,7 +105,7 @@ class AlbumsController extends Controller
     {
         $user = Auth::user();
         $songs = Song::get();
-
+        $album->price = number_format($album->price, 2);
         return view('albums.album-details', [
             'album' => $album,
             'user' => $user,
@@ -144,6 +118,8 @@ class AlbumsController extends Controller
      */
     public function edit(Albums $album)
     {
+        $auxAlbum = $album;
+        $album->price = number_format($album->price, 2);
         return response(view('albums.edit-album', compact('album')));
     }
 
@@ -179,7 +155,8 @@ class AlbumsController extends Controller
             'year' => 'required|integer|min:1500|max:2023',
             'genre' => 'required|max:50',
             'coverImg' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required|max:200'
+            'description' => 'required|max:200',
+            'price' => 'required|decimal:2'
         ]);
 
         $album->albumName = $request->albumName;
@@ -187,6 +164,7 @@ class AlbumsController extends Controller
         $album->year = $request->year;
         $album->genre = $request->genre;
         $album->description = $request->description;
+        $album->price = $request->price;
 
         if ($request->hasFile('coverImg'))
         {
@@ -219,7 +197,7 @@ class AlbumsController extends Controller
      */
     public function addSong(Request $request, Albums $album)
     {
-        $album->songs()->attach($request->song_id);
+        $album->songs()->sync($request->song_id);
         return redirect()->route('albums.show', $album);
     }
 }

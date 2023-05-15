@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" type="text/css" href="{{ asset('css/albums.css') }}">-->
-    <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <!-- Scripts -->
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <!-- Select2 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/albums.css') }}" rel="stylesheet">
-    <!-- Scripts -->
     @vite(['resources/js/app.js'])
 
     <title>Albums</title>
@@ -54,7 +58,6 @@
             {{ $song -> songName }}
             <h5><span class="badge bg-dark">{{ $song -> songDuration }}</span></h5>
            <!-- <div class="">
-              <a href="#" class="btn btn-danger">Eliminar</a>
               <a href="#" class="btn btn-warning">Editar</a>
             </div> -->
           </li>
@@ -66,15 +69,22 @@
         @csrf
         <h3 class="text-primary mb-4">Agregar canción</h3>
         <div class="form-group">
-          <div class="select-wrapper">
-            <select class="form-control custom-select mb-4" id="select-multiple" name="song_id[]" multiple>
+          <label for="song_id" class="form-label text-primary">Canciones</label>
+            <select
+              class="songs_select form-control mb-4" 
+              name="song_id[]"
+              multiple="multiple">
             @foreach ($songs as $song)
-              <option value="{{ $song -> id }}">{{ $song -> songName }}</option>
+              <option
+                value="{{ $song -> id }}"
+                {{ array_search($song->id, $album->songs->pluck('id')->toArray()) !== false ? 'selected' : '' }}>
+                {{ $song -> songName }}
+              </option>
             @endforeach
             </select>
-            <div class="mb-3">
-              <button type="submit" class="btn btn-success">Añadir</button><br>
-            </div>
+          
+          <div class="mt-4 mb-3">
+            <button type="submit" class="btn btn-success">Actualizar</button><br>
           </div>
         </div>
       </form>
@@ -100,6 +110,11 @@
   </div>
 </div>
 
+<script>
+  $('.songs_select').select2({
+    multiple: true
+  });
+</script>
 
 
 </body>

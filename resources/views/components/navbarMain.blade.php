@@ -16,21 +16,59 @@
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav me-auto">
 
-                <li class="nav-item">
+                <!-- Inicio -->
+                <li class="nav-item mr-4">
                     <a class="nav-link active" href="/albums">
                     <i class="bi bi-house-fill"></i>
                         Inicio
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active" href="/songs/create">
-                        <i class="bi bi-patch-plus-fill"></i>
-                        Añadir canciones
+                <!-- Albums -->
+                <li class="nav-item dropdown mr-4">
+                    <a class="nav-link dropdown-toggle" 
+                        href="#" 
+                        id="navbarDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                        <i class="bi bi-disc-fill"></i>
+                        Albums
                     </a>
+                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/albums">Ver albums</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"href="/albums/create">Añadir albums</a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li class="nav-item dropdown">
+                <!-- Canciones -->
+                <li class="nav-item dropdown mr-4">
+                    <a class="nav-link dropdown-toggle" 
+                        href="#" 
+                        id="navbarDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                        <i class="bi bi-music-note-list"></i>
+                        Canciones
+                    </a>
+                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/songs">Ver canciones</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"href="/songs/create">Añadir canciones</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- Cuenta -->
+                <li class="nav-item dropdown mr-4">
                     <a class="nav-link dropdown-toggle" 
                         href="#" 
                         id="navbarDropdown" 
