@@ -6,6 +6,7 @@ use App\Models\Albums;
 use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
 

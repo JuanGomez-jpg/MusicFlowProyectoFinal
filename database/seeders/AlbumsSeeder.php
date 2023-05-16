@@ -19,7 +19,7 @@ class AlbumsSeeder extends Seeder
             'genre' => 'Rock',
             'coverImg' => ''
         ]);*/
-
+        
         \App\Models\Albums::factory(20)->create();
     }
 }
