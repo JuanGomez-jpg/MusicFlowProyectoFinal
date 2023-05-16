@@ -18,44 +18,7 @@
 </head>
 <body>
     <x-navbarmain />
-    <!--  
-    <div class="row">
-        @foreach ($albums as $al)
-        <div class="column">
-            <div class="card">
-                <img src="data:image/jpeg;base64,{{ base64_encode($al->coverName) }}" height="300" width="300" />
-                <img src="{{ asset('storage/images/'.$al->coverImg) }}" height="300" width="300" />
-                    <br><br><b> {{ $al -> albumName }}</b>
-                    <br>{{ $al -> artistName }}
-                    <br>
-                <a href="/albums/{{ $al->id }}" class="button">Ver</a>
-                <a href="/albums/{{ $al->id }}/edit" class="button">Editar</a>
-            </div>
-        </div>
-        @endforeach-->
-    <!--</div>-->
 
-    <!--
-<div class="row flex-wrap">
-  @foreach ($albums as $al)
-    <div class="col-md-3">
-      <div class="card shadow p-3 mb-5 bg-white rounded" style="height: 20rem; width:20rem;">
-        <div class="text-center">
-          <img src="{{ asset('storage/images/'.$al->coverImg) }}" class="img-fluid" style="max-width: 40%; height: auto;" />
-          <div class="card-body">
-            <h5 class="card-title">{{ $al -> albumName }}</h5>
-            <p class="card-text">{{ $al -> artistName }}</p>
-          </div>
-          <div class="card-footer bg-transparent">
-            <a href="/albums/{{ $al->id }}" class="btn btn-outline-primary">Ver</a>
-            <a href="/albums/{{ $al->id }}/edit" class="btn btn-outline-warning">Editar</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  @endforeach
-</div>
--->
 <div class="album py-0">
   <div class="container mt-5">
     <h1 class="display-6">
@@ -71,21 +34,7 @@
     <br>
     <div class="row">
       @foreach ($albums as $al)
-        <div class="col-md-3">
-          <div class="card shadow p-3 mb-5 bg-white rounded">
-            <div class="text-center">
-              <img src="{{ asset('storage/images/'.$al->coverImg) }}" class="mx-auto d-block img-fluid" style="height: auto; max-width: auto;" />
-                <div class="card-body" style="height: 7rem;">
-                  <strong><h5 class="card-title">{{ $al -> albumName }}</h5></strong>
-                  <p class="card-text">{{ $al -> artistName }}</p>
-                </div>
-                <div class="card-footer bg-transparent">
-                  <a href="/albums/{{ $al->id }}" class="btn btn-primary">Ver</a>
-                  <a href="/albums/{{ $al->id }}/edit" class="btn btn-warning">Editar</a>
-                </div>
-            </div>
-          </div>
-        </div>
+        <x-album-frame :$al />
       @endforeach
     </div>
   </div>
