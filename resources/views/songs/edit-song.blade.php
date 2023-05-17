@@ -9,13 +9,14 @@
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     @vite(['resources/js/app.js'])
-    <title>Create Song</title>
+    <title>Edit Song</title>
 </head>
 <body>
     <x-navbarmain />
     <div class="form">
-        <form action="/songs" method="POST">
+        <form action="/songs/{{$song->id}}" method="POST">
             @csrf
+            @method('patch')
 
             @if ($errors -> any())
                 <div class="alert alert-danger">
@@ -30,12 +31,12 @@
             @endif
 
             <div class="container mt-5">
-                <h1 class="title">Create song</h1>
+                <h1 class="title">Edit song - {{ $song -> songName }}</h1>
 
                 <!-- Text input -->
                 <div class="form-field col-lg-6">
                     <label for="songName" class="form-label">Nombre de la canción:</label>
-                    <input type="text" id="songName" name="songName" class="form-control" value="{{ old('songName') }}">
+                    <input type="text" id="songName" name="songName" class="form-control" value="{{ old('songName') ?? $song -> songName }}">
                 </div>
 
                 <!-- Text input -->
@@ -48,13 +49,13 @@
                         class="form-control"
                         pattern="^(?!00:00$)([0-5][0-9]:[0-5][0-9])$"
                         placeholder="00:00"
-                        value="{{ old('songDuration') }}">
+                        value="{{ old('songDuration') ?? $song -> songDuration }}">
                 </div>
 
                 <!-- Text input -->
                 <div class="form-field col-lg-6">
                     <label for="songLyrics" class="form-label">Letra:</label>
-                    <input type="text" id="songLyrics" name="songLyrics" class="form-control" value="{{ old('songLyrics') }}">
+                    <input type="text" id="songLyrics" name="songLyrics" class="form-control" value="{{ old('songLyrics') ?? $song -> songLyrics }}">
                 </div>
                 <br>
 
@@ -66,7 +67,5 @@
 
         </form>
     </div>
-
-    
 </body>
 </html>

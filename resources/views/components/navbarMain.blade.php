@@ -28,14 +28,14 @@
                 <li class="nav-item dropdown mr-4">
                     <a class="nav-link dropdown-toggle" 
                         href="#" 
-                        id="navbarDropdown" 
+                        id="navbarDropdownAlbums" 
                         role="button" 
                         data-bs-toggle="dropdown" 
                         aria-expanded="false">
                         <i class="bi bi-disc-fill"></i>
                         Albums
                     </a>
-                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownAlbums">
                         <li>
                             <a class="dropdown-item" href="/albums">Ver albums</a>
                         </li>
@@ -49,19 +49,19 @@
                 <li class="nav-item dropdown mr-4">
                     <a class="nav-link dropdown-toggle" 
                         href="#" 
-                        id="navbarDropdown" 
+                        id="navbarDropdownSongs" 
                         role="button" 
                         data-bs-toggle="dropdown" 
                         aria-expanded="false">
                         <i class="bi bi-music-note-list"></i>
                         Canciones
                     </a>
-                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownSongs">
                         <li>
                             <a class="dropdown-item" href="/songs">Ver canciones</a>
                         </li>
                         <li>
-                            <a class="dropdown-item"href="/songs/create">Añadir canciones</a>
+                            <a class="dropdown-item" href="/songs/create">Añadir canciones</a>
                         </li>
                     </ul>
                 </li>
@@ -71,14 +71,14 @@
                 <li class="nav-item dropdown mr-4">
                     <a class="nav-link dropdown-toggle" 
                         href="#" 
-                        id="navbarDropdown" 
+                        id="navbarDropdownAccount" 
                         role="button" 
                         data-bs-toggle="dropdown" 
                         aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                         Cuenta
                     </a>
-                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownAccount">
                         <li>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
@@ -94,6 +94,8 @@
                         </li>
                     </ul>
                 </li>
+
+
             </ul>
             <hr class="text-white-50">
             

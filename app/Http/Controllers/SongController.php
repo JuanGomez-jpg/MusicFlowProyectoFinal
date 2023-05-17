@@ -41,12 +41,12 @@ class SongController extends Controller
             'songLyrics' => 'required|min:5|max:2500'
         ]);
 
-        $minutes = Carbon::createFromTimestamp($request->songDuration)->format('i:s');
+        //$minutes = Carbon::createFromTimestamp($request->songDuration)->format('i:s');
 
         // Storage
         $songs = new Song();
         $songs->songName = $request->songName;
-        $songs->songDuration = $minutes;
+        $songs->songDuration = $request->songDuration;
         $songs->songLyrics = $request->songLyrics;
 
         $songs->save();
@@ -59,7 +59,7 @@ class SongController extends Controller
      */
     public function show(Song $song)
     {
-        //
+        return view ('songs.song-details', compact('song'));
     }
 
     /**
@@ -67,7 +67,7 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
-        //
+        return response(view('songs.edit-song', compact('song')));
     }
 
     /**
@@ -75,7 +75,22 @@ class SongController extends Controller
      */
     public function update(Request $request, Song $song)
     {
-        //
+        $request->validate([
+            'songName' => 'required|min:4|max:50',
+            'songDuration' => 'required|max:10',
+            'songLyrics' => 'required|min:5|max:2500'
+        ]);
+
+        //$minutes = Carbon::createFromTimestamp($request->songDuration)->format('i:s');
+
+        // Storage
+        $song->songName = $request->songName;
+        $song->songDuration = $request->songDuration;
+        $song->songLyrics = $request->songLyrics;
+
+        $song->save();
+
+        return redirect()->route('songs.index');
     }
 
     /**
@@ -83,6 +98,7 @@ class SongController extends Controller
      */
     public function destroy(Song $song)
     {
-        //
+        $song -> delete();
+        return redirect()->route('songs.index');
     }
 }

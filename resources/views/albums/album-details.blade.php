@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/albums.css') }}" rel="stylesheet">
     @vite(['resources/js/app.js'])
 
+        <!-- Styles -->
+    @livewireStyles
     <title>Albums</title>
 </head>
 <body>
@@ -54,12 +56,9 @@
       <h3 class="text-primary mb-4">Canciones del álbum</h3>
       <ol class="list-group list-group-numbered mb-1">
         @foreach($album->songs as $song)
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            {{ $song -> songName }}
-            <h5><span class="badge bg-dark">{{ $song -> songDuration }}</span></h5>
-           <!-- <div class="">
-              <a href="#" class="btn btn-warning">Editar</a>
-            </div> -->
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="fw-bold md-4">{{ $song -> songName }}</div>
+            <div class="ms-auto"><h5><span class="badge bg-dark">{{ $song -> songDuration }}</span></h5></div>
           </li>
         @endforeach
       </ol>
@@ -71,7 +70,7 @@
         <div class="form-group">
           <label for="song_id" class="form-label text-primary">Canciones</label>
             <select
-              class="songs_select form-control mb-4" 
+              class="songs_select form-select mb-4" 
               name="song_id[]"
               multiple="multiple">
             @foreach ($songs as $song)
