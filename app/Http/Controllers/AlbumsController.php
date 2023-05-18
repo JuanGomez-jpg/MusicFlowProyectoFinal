@@ -199,6 +199,6 @@ class AlbumsController extends Controller
     public function addSong(Request $request, Albums $album)
     {
         $album->songs()->sync($request->song_id);
-        return redirect()->route('albums.show', $album);
+        return redirect()->route('albums.show', $album)->with('updateAlSon', 'Ok');
     }
 }

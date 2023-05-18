@@ -66,7 +66,7 @@
       </ol>
 
       @if($user -> typeUser === 'Artista')
-      <form action="{{ route('albums.add-song', $album) }}" method="POST">
+      <form action="{{ route('albums.add-song', $album) }}" id="update-album-song" method="POST">
         @csrf
         <h3 class="text-primary mb-4">Agregar canción</h3>
         <div class="form-group">
@@ -114,6 +114,11 @@
 @if(session('editedAl') == 'Ok')
     <script>
         successEditAlbum();
+    </script>
+@endif
+@if(session('updateAlSon') == 'Ok')
+    <script>
+        successUpdateAlbumSongs();
     </script>
 @endif
 <script>

@@ -28,36 +28,11 @@ function showSong(value)
       });
 }
 
-//========= DELETE ALBUM ===========
-function successDeletedAlbum()
-{
-  Swal.fire(
-    '¡Eliminado!',
-    'El album fue eliminado.',
-    'success'
-  )
-}
 
-function confirmationDeleteAlbum()
-{
-  const form = document.querySelector('#delete-album');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    Swal.fire({
-      title: '¿Estás seguro que deseas eliminar el album?',
-      text: "¡No podrás revertir los cambios!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Borrar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.submit();
-      }
-    })
-  });
-}
+
+
+
+// ======== ALBUMS================= 
 
 //========= CREATE ALBUM ===========
 function successCreatedAlbum()
@@ -89,8 +64,38 @@ function confirmationCreateAlbum()
   });
 }
 
+//========= DELETE ALBUM ===========
+function successDeletedAlbum()
+{
+  Swal.fire(
+    '¡Eliminado!',
+    'El album fue eliminado.',
+    'success'
+  )
+}
 
-//========= EDIT ALBUM ===========
+function confirmationDeleteAlbum()
+{
+  const form = document.querySelector('#delete-album');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas eliminar el album?',
+      text: "¡No podrás revertir los cambios!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
+}
+
+//========= UPDATE ALBUM ===========
 function successEditAlbum()
 {
   Swal.fire(
@@ -117,5 +122,111 @@ function confirmationEditAlbum()
         this.submit();
       }
     })
+  });
+}
+
+//======= UPDATE ALBUM SONGS =======
+function successUpdateAlbumSongs()
+{
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  Toast.fire({
+    icon: 'success',
+    title: '¡Canciones actualizadas!'
+  });
+}
+
+
+
+
+
+
+
+//========= SONGS ==================
+
+//========= CREATE ALBUM ===========
+function successCreatedSong()
+{
+  Swal.fire(
+    '¡Creada!',
+    'La canción fue creada.',
+    'success'
+  )
+}
+
+function confirmationCreateSong()
+{
+  const form = document.querySelector('#create-song');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas crear esta canción?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00b012',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Crear'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
+}
+
+//========= UPDATE SONG ===========
+function successEditSong()
+{
+  Swal.fire(
+    '¡Actualizada!',
+    'La canción fue actualizada.',
+    'success'
+  )
+}
+
+function confirmationEditSong()
+{
+  const form = document.querySelector('#edit-song');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas actualizar la canción?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00b012',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Actualizar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
+}
+
+//========= DELETE SONG ===========
+function successDeleteSong()
+{
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  Toast.fire({
+    icon: 'success',
+    title: '¡La canción fue eliminada!'
   });
 }

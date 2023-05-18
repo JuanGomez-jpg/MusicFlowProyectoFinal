@@ -42,17 +42,16 @@
   </div>
 </div>
 
-@if(session('deleteAl') == 'Ok')
-    <script>
-        successDeletedAlbum();
-    </script>
-@endif
 @if(session('createdAl') == 'Ok')
     <script>
         successCreatedAlbum();
     </script>
 @endif
-
+@if(session('deleteAl') == 'Ok')
+    <script>
+        successDeletedAlbum();
+    </script>
+@endif
 
 </body>
 </html>

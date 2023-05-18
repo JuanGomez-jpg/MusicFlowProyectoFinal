@@ -16,7 +16,7 @@
 <body>
     <x-navbarmain />
     <div class="form">
-        <form action="/songs/{{$song->id}}" method="POST">
+        <form action="/songs/{{$song->id}}" id="edit-song" method="POST">
             @csrf
             @method('patch')
 
@@ -62,7 +62,7 @@
                 <br>
 
                 <!-- Submit button -->
-                <input class="btn btn-success" type="submit" id="Boton" value="Guardar">
+                <input class="btn btn-success" onclick="confirmationEditSong()" type="submit" id="Boton" value="Guardar">
                 <a href="/songs" class="btn btn-danger">Cancelar</a>
 
             </div>

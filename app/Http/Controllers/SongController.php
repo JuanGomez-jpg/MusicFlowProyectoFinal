@@ -51,7 +51,8 @@ class SongController extends Controller
 
         $songs->save();
 
-        return redirect('/songs');
+        // return redirect('/songs');
+        return redirect()->route('songs.index')->with('createdSong', 'Ok');
     }
 
     /**
@@ -90,7 +91,8 @@ class SongController extends Controller
 
         $song->save();
 
-        return redirect()->route('songs.index');
+        //return redirect()->route('songs.index');
+        return redirect()->route('songs.index')->with('editedSong', 'Ok');
     }
 
     /**
@@ -99,6 +101,6 @@ class SongController extends Controller
     public function destroy(Song $song)
     {
         $song -> delete();
-        return redirect()->route('songs.index');
+        return redirect()->route('songs.index')->with('deleteSong', 'Ok');
     }
 }

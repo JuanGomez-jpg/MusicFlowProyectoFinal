@@ -14,8 +14,15 @@ return new class extends Migration
         Schema::create('albums_song', function (Blueprint $table) {
             $table->foreignId('albums_id')->constrained()->onDelete('cascade');
             $table->integer('song_id')->unsigned();
+
             $table->foreign('song_id')->references('id')->on('songs');
             $table->unique(['albums_id', 'song_id']);
+
+            /*$table->foreignId('song_id')->constrained();
+            $table->integer('albums_id');
+
+            $table->foreign('albums_id')->references('id')->on('albums')->onDelete('cascade');
+            $table->unique(['albums_id', 'song_id']);*/
         });
     }
 
