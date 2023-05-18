@@ -8,6 +8,8 @@
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/alerts.js') }}"></script>
     <!-- Select2 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -96,18 +98,21 @@
       <br>
 
       @if($user -> typeUser === 'Artista')
-      <div class="mb-3">
-        <form action="{{ route('albums.destroy', $album) }}" method="POST">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-dark w-100">Eliminar</button>
-        </form>
-      </div>
+        <div class="mb-3">
+          <form action="{{ route('albums.destroy', $album) }}" id="delete-album" method="POST" class="">
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="confirmationDelete()" class="btn btn-dark w-100">Eliminar</button>
+
+          </form>
+        </div>
       @endif
 
     </div>
   </div>
 </div>
+
+
 
 <script>
   $('.songs_select').select2({

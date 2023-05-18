@@ -184,7 +184,7 @@ class AlbumsController extends Controller
     public function destroy(Albums $album)
     {
         $album -> delete();
-        return redirect()->route('albums.index');
+        return redirect()->route('albums.index')->with('deleteAl', 'Ok');
     }
 
     /**

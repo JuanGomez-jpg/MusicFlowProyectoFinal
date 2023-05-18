@@ -1,3 +1,5 @@
+
+
 function showSong(value)
 {
     let songName = value.songName;
@@ -24,4 +26,34 @@ function showSong(value)
         showCloseButton: false,
         focusConfirm: false,
       });
+}
+
+function successDelete()
+{
+  Swal.fire(
+    '¡Eliminado!',
+    'El album fue eliminado.',
+    'success'
+  )
+}
+
+function confirmationDelete()
+{
+  const form = document.querySelector('#delete-album');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas eliminar el album?',
+      text: "¡No podrás revertir los cambios!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
 }

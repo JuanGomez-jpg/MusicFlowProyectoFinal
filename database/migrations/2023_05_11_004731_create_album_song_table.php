@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('albums_song', function (Blueprint $table) {
-            $table->foreignId('albums_id')->constrained();
+            $table->foreignId('albums_id')->constrained()->onDelete('cascade');
             $table->integer('song_id')->unsigned();
-            $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');
+            $table->foreign('song_id')->references('id')->on('songs');
             $table->unique(['albums_id', 'song_id']);
         });
     }
