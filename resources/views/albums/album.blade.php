@@ -44,11 +44,14 @@
 
 @if(session('deleteAl') == 'Ok')
     <script>
-        successDelete();
+        successDeletedAlbum();
     </script>
 @endif
-
-
+@if(session('createdAl') == 'Ok')
+    <script>
+        successCreatedAlbum();
+    </script>
+@endif
 
 
 </body>

@@ -28,7 +28,8 @@ function showSong(value)
       });
 }
 
-function successDelete()
+//========= DELETE ALBUM ===========
+function successDeletedAlbum()
 {
   Swal.fire(
     '¡Eliminado!',
@@ -37,7 +38,7 @@ function successDelete()
   )
 }
 
-function confirmationDelete()
+function confirmationDeleteAlbum()
 {
   const form = document.querySelector('#delete-album');
   form.addEventListener('submit', function(event) {
@@ -50,6 +51,67 @@ function confirmationDelete()
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
+}
+
+//========= CREATE ALBUM ===========
+function successCreatedAlbum()
+{
+  Swal.fire(
+    '¡Creado!',
+    'El album fue creado.',
+    'success'
+  )
+}
+
+function confirmationCreateAlbum()
+{
+  const form = document.querySelector('#create-album');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas crear el album?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00b012',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Crear'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
+}
+
+
+//========= EDIT ALBUM ===========
+function successEditAlbum()
+{
+  Swal.fire(
+    '¡Actualizado!',
+    'El album fue actualizado.',
+    'success'
+  )
+}
+
+function confirmationEditAlbum()
+{
+  const form = document.querySelector('#edit-album');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas actualizar el album?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00b012',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Actualizar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.submit();

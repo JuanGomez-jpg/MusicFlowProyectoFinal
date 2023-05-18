@@ -94,7 +94,8 @@ class AlbumsController extends Controller
         $albums->user_id = $user->id;
         $albums->save();
         //Albums::create($request->all());s
-        return redirect('/albums');
+        //return redirect('/albums'); Before
+        return redirect()->route('albums.index')->with('createdAl', 'Ok');
     }
 
     /**
@@ -172,10 +173,11 @@ class AlbumsController extends Controller
             $album->coverImg = $filename;
         }
 
-
         $album -> save();
 
-        return redirect('/albums/' . $album->id);
+        // return redirect('/albums/' . $album->id); Before
+        return redirect('/albums/' . $album->id)->with('editedAl', 'Ok');
+        //return redirect()->route('albums.index')->with('createdAl', 'Ok');
     }
 
     /**

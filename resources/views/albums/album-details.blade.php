@@ -102,8 +102,7 @@
           <form action="{{ route('albums.destroy', $album) }}" id="delete-album" method="POST" class="">
             @csrf
             @method('DELETE')
-            <button type="submit" onclick="confirmationDelete()" class="btn btn-dark w-100">Eliminar</button>
-
+            <button type="submit" onclick="confirmationDeleteAlbum()" class="btn btn-dark w-100">Eliminar</button>
           </form>
         </div>
       @endif
@@ -112,13 +111,17 @@
   </div>
 </div>
 
-
-
+@if(session('editedAl') == 'Ok')
+    <script>
+        successEditAlbum();
+    </script>
+@endif
 <script>
   $('.songs_select').select2({
     multiple: true
   });
 </script>
+
 
 
 </body>
