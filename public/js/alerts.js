@@ -10,20 +10,18 @@ function showSong(value)
     var lineas = textoFormateado.split('\n');
     lineas.shift();
     var textoSinPrimeraLinea = lineas.join('\n');
-    console.log(textoSinPrimeraLinea);
-
     Swal.fire({
         title: '<strong><pre><code>'+ songName + '</code></pre></strong>',
         text: 'Duración: ' + songDuration,
         input: 'textarea',
         inputLabel: 'Letra',
-        inputValue:textoFormateado,
+        inputValue:textoSinPrimeraLinea,
         inputAttributes: {
-            rows: 5,
-            style: 'border: 1px solid red; font-size: 16px;',
-            disabled: true
+            rows: 20,
+            style: "border: 1px solid red; font-size: 16px; height: auto;",
+            disabled: true,
         },
-        showCloseButton: true,
+        showCloseButton: false,
         focusConfirm: false,
       });
 }
