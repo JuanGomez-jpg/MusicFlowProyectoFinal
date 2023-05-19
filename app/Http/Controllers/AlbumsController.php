@@ -45,8 +45,8 @@ class AlbumsController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $this->authorize('create');
+    {   
+        Gate::authorize('artist-albums');
         return view('albums.create-album');
     }
 
@@ -105,10 +105,11 @@ class AlbumsController extends Controller
      */
     public function edit(Albums $album)
     {
-        $this->authorize('edit', $album);
+        Gate::authorize('artist-albums');
+        $user = Auth::user();
         $auxAlbum = $album;
         $album->price = number_format($album->price, 2);
-        return response(view('albums.edit-album', compact('album')));
+        return response(view('albums.edit-album', compact('album', 'user')));
     }
 
     /**
@@ -116,7 +117,7 @@ class AlbumsController extends Controller
      */
     public function update(Request $request, Albums $album)
     {
-        $this->authorize('update');
+        Gate::authorize('artist-albums');
         //Validation storage
         $request->validate([
             'albumName' => 'required|min:2|max:70',
@@ -152,8 +153,8 @@ class AlbumsController extends Controller
      */
     public function destroy(Albums $album)
     {
-        //Gate::authorize('artist-albums');
-        $this->authorize('delete');
+        Gate::authorize('artist-albums');
+        //$this->authorize('delete');
         $album -> delete();
         return redirect()->route('albums.index')->with('deleteAl', 'Ok');
     }

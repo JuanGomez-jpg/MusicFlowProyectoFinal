@@ -240,7 +240,6 @@ function showLogOut()
     position: 'top-end',
     showConfirmButton: false,
     timer: 800,
-    timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }

@@ -23,6 +23,10 @@ Route::redirect('/', 'login');
 Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
 Route::resource('songs', SongController::class)->middleware('auth');
 Route::resource('albums', AlbumsController::class)->middleware('auth');
+
+Route::get('shopping-cart', function() {
+    return view('shopping-cart');
+});
 //Route::get('albums/create', [AlbumsController::class, 'create']);
 //Route::get('albums', [AlbumsController::class, 'index']);
 

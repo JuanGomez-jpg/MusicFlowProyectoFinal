@@ -14,7 +14,11 @@
     <title>Edit Song</title>
 </head>
 <body>
-    <x-navbarmain />
+    @if($user -> typeUser == 'Artista')
+        <x-navbarmain />
+    @else
+        <x-navbaruser />
+    @endif
     <div class="form">
         <form action="/songs/{{$song->id}}" id="edit-song" method="POST">
             @csrf

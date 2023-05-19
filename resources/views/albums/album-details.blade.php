@@ -24,8 +24,11 @@
     <title>Albums</title>
 </head>
 <body>
+@if($user -> typeUser == 'Artista')
   <x-navbarmain />
-
+@else
+  <x-navbaruser />
+@endif
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-4 text-center">
@@ -33,7 +36,7 @@
       
       @if($user -> typeUser !== 'Artista')
         <div class="mt-3">
-          <a href="#" class="btn btn-outline-primary w-100">Comprar</a>
+          <a href="#" class="btn btn-outline-info w-100">Comprar</a>
         </div>
       @endif
       

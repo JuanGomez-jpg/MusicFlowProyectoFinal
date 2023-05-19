@@ -19,8 +19,11 @@
     <title>Albums</title>
 </head>
 <body>
+  @if($user -> typeUser == 'Artista')
     <x-navbarmain />
-
+  @else
+    <x-navbaruser />
+  @endif
 <div class="album py-0">
   <div class="container mt-5">
     <h1 class="display-6">
