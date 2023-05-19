@@ -41,11 +41,11 @@
         <a href="/albums" class="btn btn-primary w-100">Inicio</a><br>
       </div>
 
-      @if($user -> typeUser === 'Artista')
+      @can('update', $album)
         <div class="mt-3">
           <a href="/albums/{{ $album->id }}/edit" class="btn btn-warning w-100">Editar</a>
         </div>
-      @endif
+      @endcan
 
     </div>
 
@@ -65,7 +65,7 @@
         @endforeach
       </ol>
 
-      @if($user -> typeUser === 'Artista')
+      @can('update', $album)
       <form action="{{ route('albums.add-song', $album) }}" id="update-album-song" method="POST">
         @csrf
         <h3 class="text-primary mb-4">Agregar canción</h3>
@@ -89,7 +89,7 @@
           </div>
         </div>
       </form>
-      @endif
+      @endcan
 
       <h3 class="text-primary mb-3">Descripción del álbum</h3>
       <div class="" style="word-wrap: break-word;">
@@ -97,7 +97,7 @@
       </div>
       <br>
 
-      @if($user -> typeUser === 'Artista')
+      @can('delete', $album)
         <div class="mb-3">
           <form action="{{ route('albums.destroy', $album) }}" id="delete-album" method="POST" class="">
             @csrf
@@ -105,7 +105,7 @@
             <button type="submit" onclick="confirmationDeleteAlbum()" class="btn btn-dark w-100">Eliminar</button>
           </form>
         </div>
-      @endif
+      @endcan
 
     </div>
   </div>

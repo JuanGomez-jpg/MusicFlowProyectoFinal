@@ -14,12 +14,11 @@ use App\Http\Controllers\SongController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/', function () {
-    return view('welcome');
-});
-
-//Route::resource('albums/{album}/create-song', [AlbumsController::class])->name('albums.create-song');
+    return view('terms');
+});*/
+Route::redirect('/', 'login');
 
 Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
 Route::resource('songs', SongController::class)->middleware('auth');
@@ -32,8 +31,8 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
+]);/*->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+});*/

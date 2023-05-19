@@ -36,7 +36,7 @@
     <br>
     <div class="row">
       @foreach ($albums as $al)
-        <x-album-frame :$al />
+        <x-album-frame :$al :$user />
       @endforeach
     </div>
   </div>

@@ -11,9 +11,10 @@ class AlbumFrame extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($al)
+    public function __construct($al, $user)
     {
         $this->al = $al;
+        $this->us = $user;
     }
 
     /**
@@ -22,7 +23,8 @@ class AlbumFrame extends Component
     public function render(): View|Closure|string
     {
         return view('components.album-frame',[
-            'al' => $this->al
+            'al' => $this->al,
+            'us' => $this->us,
         ]);
     }
 }

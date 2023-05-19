@@ -8,7 +8,9 @@
             </div>
             <div class="card-footer bg-transparent">
                 <a href="/albums/{{ $al->id }}" class="btn btn-primary">Ver</a>
-                <a href="/albums/{{ $al->id }}/edit" class="btn btn-warning">Editar</a>
+                @can('update', $al)
+                    <a href="/albums/{{ $al->id }}/edit" class="btn btn-warning">Editar</a>
+                @endcan
             </div>
         </div>
     </div>

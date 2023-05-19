@@ -7,6 +7,7 @@ use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Gate;
 
 use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
 
@@ -15,6 +16,9 @@ use File;
 
 class AlbumsController extends Controller
 {
+    public function __construct()
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,10 +26,19 @@ class AlbumsController extends Controller
     {
         //$albums = Albums::all();
         $user = Auth::user();
-        $albums = Auth::user()->albums()->get();
-        return response(view('albums.album',[
-            'albums' => $albums,
-            'user' => $user]));
+        if ($user -> typeUser === 'Artista')
+        {
+            $albums = Auth::user()->albums()->get();
+            return response(view('albums.album',[
+                'albums' => $albums,
+                'user' => $user]));
+        }
+        else
+        {
+            $albums = Albums::all();
+            return response(view('albums.album', compact('albums','user')));
+        }
+
     }
 
     /**
@@ -33,6 +46,7 @@ class AlbumsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
         return view('albums.create-album');
     }
 
@@ -41,28 +55,7 @@ class AlbumsController extends Controller
      */
     public function store(Request $request)
     {
-        //validation Blob
-        /*$request->validate([
-            'albumName' => 'required|max:70',
-            'year' => 'required|integer|min:1500|max:2023',
-            'genre' => 'required|max:50',
-            'coverName' => 'required|file|mimes:jpg,png,jpeg,map|max:64'
-        ]);*/
-
-        // Blob
-        /*
-        $albums = new Albums();
-        $albums->albumName = $request->albumName;
-        $albums->year = $request->year;
-        $albums->genre = $request->genre;
-
-        if ($request->hasFile('coverName'))
-        {
-            $imageData = file_get_contents($request->file('coverName'));
-            $albums->coverName = $imageData;
-        }*/
-
-    
+        Gate::authorize('artist-albums');
         //Validation storage
         $request->validate([
             'albumName' => 'required|min:2|max:70',
@@ -93,8 +86,6 @@ class AlbumsController extends Controller
         $user = Auth::user();
         $albums->user_id = $user->id;
         $albums->save();
-        //Albums::create($request->all());s
-        //return redirect('/albums'); Before
         return redirect()->route('albums.index')->with('createdAl', 'Ok');
     }
 
@@ -106,11 +97,7 @@ class AlbumsController extends Controller
         $user = Auth::user();
         $songs = Song::get();
         $album->price = number_format($album->price, 2);
-        return view('albums.album-details', [
-            'album' => $album,
-            'user' => $user,
-            'songs' => $songs
-        ]);
+        return view('albums.album-details', compact('user','album','songs'));
     }
 
     /**
@@ -118,6 +105,7 @@ class AlbumsController extends Controller
      */
     public function edit(Albums $album)
     {
+        $this->authorize('edit', $album);
         $auxAlbum = $album;
         $album->price = number_format($album->price, 2);
         return response(view('albums.edit-album', compact('album')));
@@ -128,26 +116,7 @@ class AlbumsController extends Controller
      */
     public function update(Request $request, Albums $album)
     {
-        //Validation Blob
-        /*
-        $request->validate([
-            'albumName' => 'required|max:70',
-            'year' => 'required|integer|min:1500|max:2023',
-            'genre' => 'required|max:50',
-            'coverName' => 'required|file|mimes:jpg,png,jpeg,map|max:64'
-        ]);
-
-        $album->albumName = $request->albumName;
-        $album->year = $request->year;
-        $album->genre = $request->genre;
-
-        if ($request->hasFile('coverName'))
-        {
-            $imageData = file_get_contents($request->file('coverName'));
-            $album->coverName = $imageData;
-        }
-        */
-
+        $this->authorize('update');
         //Validation storage
         $request->validate([
             'albumName' => 'required|min:2|max:70',
@@ -175,9 +144,7 @@ class AlbumsController extends Controller
 
         $album -> save();
 
-        // return redirect('/albums/' . $album->id); Before
         return redirect('/albums/' . $album->id)->with('editedAl', 'Ok');
-        //return redirect()->route('albums.index')->with('createdAl', 'Ok');
     }
 
     /**
@@ -185,6 +152,8 @@ class AlbumsController extends Controller
      */
     public function destroy(Albums $album)
     {
+        //Gate::authorize('artist-albums');
+        $this->authorize('delete');
         $album -> delete();
         return redirect()->route('albums.index')->with('deleteAl', 'Ok');
     }
@@ -198,6 +167,7 @@ class AlbumsController extends Controller
      */
     public function addSong(Request $request, Albums $album)
     {
+        Gate::authorize('artist-albums');
         $album->songs()->sync($request->song_id);
         return redirect()->route('albums.show', $album)->with('updateAlSon', 'Ok');
     }

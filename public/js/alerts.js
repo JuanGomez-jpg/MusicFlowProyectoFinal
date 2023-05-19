@@ -230,3 +230,24 @@ function successDeleteSong()
     title: '¡La canción fue eliminada!'
   });
 }
+
+
+//======== LOG OUT ================
+function showLogOut()
+{
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 800,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  
+  Toast.fire({
+    icon: 'success',
+    title: 'Sesión cerrada'
+  })
+}

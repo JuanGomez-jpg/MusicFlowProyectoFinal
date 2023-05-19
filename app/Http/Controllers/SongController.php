@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Song;
 use App\Models\Albums;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
 
@@ -16,6 +17,7 @@ class SongController extends Controller
      */
     public function index()
     {
+        Gate::authorize('artist-songs');
         $songs = Song::all();
 
         return response(view('songs.song', [
@@ -27,6 +29,7 @@ class SongController extends Controller
      */
     public function create()
     {
+        Gate::authorize('artist-songs');
         return view('songs.create-song');
     }
 
@@ -35,6 +38,7 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('artist-songs');
         $request->validate([
             'songName' => 'required|min:4|max:50',
             'songDuration' => 'required|max:10',
@@ -60,6 +64,7 @@ class SongController extends Controller
      */
     public function show(Song $song)
     {
+        Gate::authorize('artist-songs');
         return view ('songs.song-details', compact('song'));
     }
 
@@ -68,6 +73,7 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
+        Gate::authorize('artist-songs');
         return response(view('songs.edit-song', compact('song')));
     }
 
@@ -76,6 +82,7 @@ class SongController extends Controller
      */
     public function update(Request $request, Song $song)
     {
+        Gate::authorize('artist-songs');
         $request->validate([
             'songName' => 'required|min:4|max:50',
             'songDuration' => 'required|max:10',
@@ -100,6 +107,7 @@ class SongController extends Controller
      */
     public function destroy(Song $song)
     {
+        Gate::authorize('artist-songs');
         $song -> delete();
         return redirect()->route('songs.index')->with('deleteSong', 'Ok');
     }
