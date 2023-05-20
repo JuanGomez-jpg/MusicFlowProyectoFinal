@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('cardExp', 7);
             $table->string('CVV', 3);
             $table->string('purchaseDate', 10);
+            $table->double('total', 8, 2);
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('albums_id')->constrained();
         });
     }
 

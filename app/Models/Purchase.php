@@ -9,8 +9,8 @@ use App\Models\User;
 class Purchase extends Model
 {
     use HasFactory;
-    protected $fillable = ['cardHolderName', 'cardNumber', 'cardExp', 'CVV', 'purchaseDate', 'user_id'];
-
+    protected $fillable = ['cardHolderName', 'cardNumber', 'cardExp', 'CVV', 'purchaseDate', 'total', 'user_id', 'albums_id'];
+    public $timestamps = false;
     public function user()
     {
         return $this->belongsTo(User::class);

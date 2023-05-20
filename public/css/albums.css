@@ -1,66 +1,10 @@
-body{
-    background-color: #f7f7f7;
-}
-
-*{
-    box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #6a11cb;
   
-  /* Float four columns side by side */
-.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
-}
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgb(245, 213, 255), rgb(162, 196, 255));
   
-  /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-  
-  /* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-
-/* iTunes Style */
-.list-group-item {
-  border: none;
-}
-
-.list-group-item:hover {
-  background-color: #f5f5f5;
-}
-
-.list-group-item-action:hover {
-  background-color: #f5f5f5;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background-color: #007aff;
-  border-color: #007aff;
-}
-
-.btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #f5f5f5;
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgb(234, 229, 240), rgb(255, 220, 220));
 }

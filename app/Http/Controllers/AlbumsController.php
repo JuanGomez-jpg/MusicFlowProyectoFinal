@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
 
@@ -36,7 +37,15 @@ class AlbumsController extends Controller
         }
         else
         {
-            $albums = Albums::all();
+            $user_id = $user->id;
+            $albums = DB::table('albums')
+                ->whereNotIn('id', function($query) use ($user_id) {
+                    $query->select('albums_id')
+                        ->from('purchases')
+                        ->where('user_id', $user_id);
+                })
+                ->get();
+            
             return response(view('albums.album', compact('albums','user')));
         }
 

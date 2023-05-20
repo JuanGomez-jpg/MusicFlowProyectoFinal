@@ -51,7 +51,7 @@
                 <!-- Number input -->
                 <div class="form-field col-lg-6">
                     <label class="form-label" for="year">Año</label>
-                    <input type="number" id="year" name="year" class="form-control" value="{{ old('year') }}" />
+                    <input type="number" id="year" placeholder="0000" name="year" class="form-control" value="{{ old('year') }}" />
                 </div>
 
                 <!-- Text input -->
@@ -67,7 +67,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}"></input>
+                        <input type="number" step="0.01" placeholder="0.00" class="form-control" id="price" name="price" value="{{ old('price') }}"></input>
                     </div>
                 </div>
 

@@ -25,12 +25,11 @@ Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->na
 Route::resource('songs', SongController::class)->middleware('auth');
 Route::resource('albums', AlbumsController::class)->middleware('auth');
 
-//Route::resource('shopping-cart', PurchaseController::class);
+Route::resource('shopping-cart', PurchaseController::class);
 
-//Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'addPurchase'])->name('add-purchase');
-Route::get('shopping-cart/{album}', function($album='album') {
-    return view('shopping-cart.create-shopping-cart', compact('album'));
-});
+Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase');
+Route::post('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'store'])->name('store-purchase');
+
 
 //Route::get('albums/create', [AlbumsController::class, 'create']);
 //Route::get('albums', [AlbumsController::class, 'index']);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     use HasFactory;
-    protected $fillable = ['songName', 'songDuration', 'songLyrics'];
+    protected $fillable = ['songName', 'songDuration', 'songLyrics', 'user_id'];
     protected $table = 'songs';
     public $timestamps = false;
 

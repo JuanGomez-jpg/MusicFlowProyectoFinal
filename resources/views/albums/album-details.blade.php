@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Scripts -->
-    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -16,7 +15,7 @@
 
     <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/albums.css') }}" rel="stylesheet">
+
     @vite(['resources/js/app.js'])
 
         <!-- Styles -->
@@ -29,20 +28,16 @@
   @else
     <x-navbaruser />
   @endif
+
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-4 text-center">
         <img src="{{ asset('storage/images/'.$album->coverImg) }}" class="mx-auto d-block img-fluid rounded" style="height: auto; max-width: auto;">
         
         @if($user -> typeUser !== 'Artista')
-
-
-
-
           <div class="mt-3">
-            <a href="{{ route('shopping-cart, $album) }}" class="btn btn-outline-info w-100">Comprar</a>
+            <a href="{{ route('add-purchase', $album) }}" class="btn btn-info w-100">Comprar</a>
           </div>
-
         @endif
         
         <div class="mt-3">
@@ -83,13 +78,13 @@
                 class="songs_select form-select mb-4" 
                 name="song_id[]"
                 multiple="multiple">
-              @foreach ($songs as $song)
-                <option
-                  value="{{ $song -> id }}"
-                  {{ array_search($song->id, $album->songs->pluck('id')->toArray()) !== false ? 'selected' : '' }}>
-                  {{ $song -> songName }}
-                </option>
-              @endforeach
+                @foreach ($user->songs as $song)
+                  <option
+                    value="{{ $song -> id }}"
+                    {{ array_search($song->id, $album->songs->pluck('id')->toArray()) !== false ? 'selected' : '' }}>
+                    {{ $song -> songName }}
+                  </option>
+                @endforeach
               </select>
             
             <div class="mt-4 mb-3">
@@ -121,23 +116,22 @@
     </div>
   </div>
 
-@if(session('editedAl') == 'Ok')
-    <script>
-        successEditAlbum();
-    </script>
-@endif
-@if(session('updateAlSon') == 'Ok')
-    <script>
-        successUpdateAlbumSongs();
-    </script>
-@endif
-<script>
-  $('.songs_select').select2({
-    multiple: true
-  });
-</script>
 
-
+  @if(session('editedAl') == 'Ok')
+      <script>
+          successEditAlbum();
+      </script>
+  @endif
+  @if(session('updateAlSon') == 'Ok')
+      <script>
+          successUpdateAlbumSongs();
+      </script>
+  @endif
+  <script>
+    $('.songs_select').select2({
+      multiple: true
+    });
+  </script>
 
 </body>
 </html>

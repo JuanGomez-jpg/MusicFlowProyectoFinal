@@ -6,6 +6,7 @@ use App\Models\Song;
 use App\Models\Albums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon; // Biblioteca de manejo de fechas y tiempos
 
@@ -18,7 +19,8 @@ class SongController extends Controller
     public function index()
     {
         Gate::authorize('artist-songs');
-        $songs = Song::all();
+        $songs = Auth::user()->songs()->get();
+        //$songs = Song::all();
 
         return response(view('songs.song', [
             'songs' => $songs
@@ -53,6 +55,8 @@ class SongController extends Controller
         $songs->songName = $request->songName;
         $songs->songDuration = $request->songDuration;
         $songs->songLyrics = $request->songLyrics;
+        $user = Auth::user();
+        $songs->user_id = $user->id;
 
         $songs->save();
 

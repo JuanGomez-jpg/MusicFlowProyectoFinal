@@ -22,6 +22,7 @@ class SongFactory extends Factory
             'songName' => $this->faker->firstName('male'|'female'),
             'songDuration' => $this->faker->time('i:s'),
             'songLyrics' => $this->faker->text(100),
+            'user_id' => '1',
         ];
     }
 }

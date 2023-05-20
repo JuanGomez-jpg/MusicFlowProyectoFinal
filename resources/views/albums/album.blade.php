@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" type="text/css" href="{{ asset('css/albums.css') }}">-->
     <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -19,42 +18,44 @@
     <title>Albums</title>
 </head>
 <body>
+<section class="h-100 gradient-custom">
   @if($user -> typeUser == 'Artista')
     <x-navbarmain />
   @else
     <x-navbaruser />
   @endif
-<div class="album py-0">
-  <div class="container mt-5">
-    <h1 class="display-6">
-      <strong>
-        Albums · {{ $user -> name }}
-      </strong>
-      @if($user -> typeUser === 'Artista')
-        <a href="/albums/create" class="btn btn-success">
-          Añadir
-        </a>
-      @endif
-    </h1>
-    <br>
-    <div class="row">
-      @foreach ($albums as $al)
-        <x-album-frame :$al :$user />
-      @endforeach
+
+    <div class="album py-0">
+      <div class="container mt-5">
+        <h1 class="display-6">
+          <strong>
+            Albums · {{ $user -> name }}
+          </strong>
+          @if($user -> typeUser === 'Artista')
+            <a href="/albums/create" class="btn btn-success">
+              Añadir album
+            </a>
+          @endif
+        </h1>
+        <br>
+        <div class="row">
+          @foreach ($albums as $al)
+            <x-album-frame :$al :$user />
+          @endforeach
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-@if(session('createdAl') == 'Ok')
-    <script>
-        successCreatedAlbum();
-    </script>
-@endif
-@if(session('deleteAl') == 'Ok')
-    <script>
-        successDeletedAlbum();
-    </script>
-@endif
-
+    @if(session('createdAl') == 'Ok')
+        <script>
+            successCreatedAlbum();
+        </script>
+    @endif
+    @if(session('deleteAl') == 'Ok')
+        <script>
+            successDeletedAlbum();
+        </script>
+    @endif
+</section>
 </body>
 </html>

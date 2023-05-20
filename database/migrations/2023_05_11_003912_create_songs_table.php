@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('songName', 50);
             $table->string('songDuration', 10);
             $table->string('songLyrics', 2500);
+            $table->foreignId('user_id')->constrained();
         });
     }
 

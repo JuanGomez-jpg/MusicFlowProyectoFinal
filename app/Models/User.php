@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use App\Models\Albums;
 use App\Models\Purchase;
+use App\Models\Song;
 
 class User extends Authenticatable
 {
@@ -70,5 +71,10 @@ class User extends Authenticatable
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
+    }
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use App\Models\Albums;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -21,9 +23,7 @@ class PurchaseController extends Controller
      */
     public function create(Albums $album)
     {
-        return view('shopping-cart.create-purchase', compact('album'));
-        
-        //return view('shopping-cart.create-purchase', compact('album'));
+        return view('shopping-cart.create-shopping-cart', compact('album'));
     }
 
     /**
@@ -31,7 +31,33 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validation storage
+        $request->validate([
+            'cardHolder' => 'required|min:5|max:70',
+            'cardNumber' => 'required|min:16|max:16',
+            'cardExp' => 'required|min:7|max:7',
+            'CVV' => 'required|min:3|max:3',
+        ]);
+        
+        // Storage
+        $purchase = new Purchase();
+        $purchase->cardHolderName = $request->cardHolder;
+        $purchase->cardNumber = $request->cardNumber;
+        $purchase->cardExp = $request->cardExp;
+        $purchase->CVV = $request->CVV;
+
+        $fechaActual = Carbon::now();
+        $fechaFormateada = $fechaActual->format('Y-m-d');
+        $purchase->purchaseDate = $fechaFormateada;
+
+        $user = Auth::user();
+        $purchase->user_id = $user->id;
+
+        $purchase->total = $request->price;
+        $purchase->albums_id = $request->albums_id;
+
+        $purchase->save();
+        return redirect()->route('albums.index')->with('createdPurchase', 'Ok');
     }
 
     /**
@@ -69,6 +95,6 @@ class PurchaseController extends Controller
     public function addPurchase(Request $request, Albums $album)
     {
 
-        return view('shopping-cart.create-shopping-cart', compact('album'));
+        //return view('shopping-cart.create-shopping-cart', compact('album'));
     }
 }
