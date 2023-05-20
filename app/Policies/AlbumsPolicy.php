@@ -13,7 +13,6 @@ class AlbumsPolicy
      */
     public function viewAny(User $user): bool
     {
-        
     }
 
     /**

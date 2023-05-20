@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,23 @@ Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->na
 Route::resource('songs', SongController::class)->middleware('auth');
 Route::resource('albums', AlbumsController::class)->middleware('auth');
 
-Route::get('shopping-cart', function() {
-    return view('shopping-cart');
+//Route::resource('shopping-cart', PurchaseController::class);
+
+//Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'addPurchase'])->name('add-purchase');
+Route::get('shopping-cart/{album}', function($album='album') {
+    return view('shopping-cart.create-shopping-cart', compact('album'));
 });
+
 //Route::get('albums/create', [AlbumsController::class, 'create']);
 //Route::get('albums', [AlbumsController::class, 'index']);
+
+
+
+
+
+
+
+
 
 
 Route::middleware([

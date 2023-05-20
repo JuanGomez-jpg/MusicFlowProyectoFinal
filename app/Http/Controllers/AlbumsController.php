@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Albums;
 use App\Models\Song;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -154,7 +155,7 @@ class AlbumsController extends Controller
     public function destroy(Albums $album)
     {
         Gate::authorize('artist-albums');
-        //$this->authorize('delete');
+        $this->authorize('delete');
         $album -> delete();
         return redirect()->route('albums.index')->with('deleteAl', 'Ok');
     }

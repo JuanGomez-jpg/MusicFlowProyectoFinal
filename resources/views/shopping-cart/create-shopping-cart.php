@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,10 @@
     <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Compra</title>
 </head>
 <body>
+<x-navbaruser />
 
 <section class="h-100 gradient-custom">
   <div class="container py-3">
@@ -143,7 +144,7 @@
                             name="cardHolder" 
                             class="form-control" 
                             placeholder="Pancho Pérez"
-                            value="{{ old('albumName') }}" />
+                             />
                       </div>
                     </div>
                   </li>
@@ -160,9 +161,9 @@
                             name="cardNumber" 
                             class="form-control" 
                             placeholder="1234 5678 9012 3457" 
-                            minlength="19" 
-                            maxlength="19"
-                            value="{{ old('albumName') }}" />
+                            minlength="16" 
+                            maxlength="16"
+                            />
                       </div>
                     </div>
                   </li>
@@ -176,14 +177,14 @@
                           <div class="form-outline form-white">
                             <label class="form-label" for="typeExp">Expiration</label>
                             <input type="text" id="typeExp" class="form-control"
-                              placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
+                              placeholder="MM/YYYY" data-mask="00 / 00" size="7" id="exp" minlength="7" maxlength="7" />
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-outline form-white">
-                            <label class="form-label" for="typeText">Cvv</label>
+                            <label class="form-label" for="typeText">CVV</label>
                             <input type="password" id="typeText" class="form-control"
-                              placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                              placeholder="&#9679;&#9679;&#9679;" data-mask="000" size="1" minlength="3" maxlength="3" />
                           </div>
                         </div>
                     </div>

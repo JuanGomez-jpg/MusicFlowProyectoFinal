@@ -21,7 +21,8 @@ class SongController extends Controller
         $songs = Song::all();
 
         return response(view('songs.song', [
-            'songs' => $songs]));
+            'songs' => $songs
+        ]));
     }
 
     /**
