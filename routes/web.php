@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\PurchaseController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +22,37 @@ use App\Http\Controllers\PurchaseController;
 Route::get('/', function () {
     return view('terms');
 });*/
+
+
+//========== Rutas para verificación de email=======================
+Route::get('/email/verify', function() {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+//================================================================================================
+
+
+// Home
 Route::redirect('/', 'login');
+///////////////////////////////
+
 
 Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
-Route::resource('songs', SongController::class)->middleware('auth');
-Route::resource('albums', AlbumsController::class)->middleware('auth');
+Route::resource('songs', SongController::class)->middleware('verified');
+Route::resource('albums', AlbumsController::class)->middleware('verified');
 
-Route::resource('shopping-cart', PurchaseController::class);
+Route::resource('shopping-cart', PurchaseController::class)->middleware('verified');
 
 Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase');
 Route::post('shopping-cart/{album}/store-purchase', [PurchaseController::class, 'store'])->name('store-purchase');
