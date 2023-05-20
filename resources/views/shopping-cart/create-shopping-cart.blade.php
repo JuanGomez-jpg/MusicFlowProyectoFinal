@@ -8,6 +8,8 @@
     <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <script defer="" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/alerts.js') }}"></script>
     @vite(['resources/js/app.js'])
 
     <!-- Styles -->
@@ -75,7 +77,7 @@
           </div>
           <div class="card-body">
 
-            <form action="/shopping-cart" method="POST" class="">
+            <form action="/shopping-cart" id="create-purchase" method="POST" class="">
               @csrf
 
               @if ($errors -> any())
@@ -165,7 +167,7 @@
                     <div class="card-body">
                       <div class="row mb-4">
                         <div class="text-center">
-                          <input type="submit" class="btn btn-warning btn-lg btn-block" value="Proceder a pagar">
+                          <input type="submit" onclick="confirmationCreatePurchase()" class="btn btn-warning btn-lg btn-block" value="Proceder a pagar">
                         </div>                      
                       </div>
                     </div>

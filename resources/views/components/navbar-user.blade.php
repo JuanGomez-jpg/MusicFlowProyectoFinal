@@ -26,7 +26,7 @@
 
                 <!-- Compras -->
                 <li class="nav-item dropdown mr-4">
-                    <a class="nav-link active" href="#" >
+                    <a class="nav-link active" href="/shopping-cart" >
                         <i class="bi bi-bag-heart-fill"></i>
                         Compras
                     </a>

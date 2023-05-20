@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Albums;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -15,7 +16,25 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //return response(view('shopping-cart.shopping-cart'));
+        $user = Auth::user();
+        $userId = $user->id;
+        $albums = DB::table('albums') // Obtengo los albums de las compras asociadas con los albums y las purchases no borradas con softdeletes
+        ->join('purchases', 'albums.id', '=', 'purchases.albums_id')
+        ->where('purchases.user_id', $userId)
+        ->whereNull('purchases.deleted_at')
+        ->select('albums.*')
+        ->distinct()
+        ->get();
+        $purchasesUser = Auth::user()->purchases; // Obtengo las compras
+        $count = count($purchasesUser); // Longitud del arreglo
+        $purchases = []; // Nuevo arreglo
+
+        for ($i = 0; $i < $count; $i++) {
+            $valor1 = $purchasesUser[$i];
+            $valor2 = $albums[$i];
+            $purchases[] = ['purchase' => $valor1, 'album' => $valor2];
+        }
+        return response(view('shopping-cart.shopping-cart', compact('purchases')));
     }
 
     /**
@@ -89,7 +108,8 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
+        return redirect()->route('albums.index')->with('deletePurchase', 'Ok');
     }
 
     public function addPurchase(Request $request, Albums $album)

@@ -56,6 +56,16 @@
             successDeletedAlbum();
         </script>
     @endif
+    @if(session('deletePurchase') == 'Ok')
+        <script>
+            successDeletePurchase();
+        </script>
+    @endif
+    @if(session('createdPurchase') == 'Ok')
+        <script>
+            successCreatedPurchase();
+        </script>
+    @endif
 </section>
 </body>
 </html>

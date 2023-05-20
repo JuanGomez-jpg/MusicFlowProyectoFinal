@@ -163,6 +163,7 @@ class AlbumsController extends Controller
      */
     public function destroy(Albums $album)
     {
+        dd($album);
         Gate::authorize('artist-albums');
         $this->authorize('delete');
         $album -> delete();

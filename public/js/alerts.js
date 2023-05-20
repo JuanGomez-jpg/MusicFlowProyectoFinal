@@ -152,7 +152,7 @@ function successUpdateAlbumSongs()
 
 //========= SONGS ==================
 
-//========= CREATE ALBUM ===========
+//========= CREATE SONG ===========
 function successCreatedSong()
 {
   Swal.fire(
@@ -231,6 +231,25 @@ function successDeleteSong()
   });
 }
 
+//========= DELETE SONG ===========
+function successDeletePurchase()
+{
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  Toast.fire({
+    icon: 'success',
+    title: '¡Se eliminó la compra!'
+  });
+}
+
 
 //======== LOG OUT ================
 function showLogOut()
@@ -249,4 +268,37 @@ function showLogOut()
     icon: 'success',
     title: 'Sesión cerrada'
   })
+}
+
+
+//========= PURCHASES ==================
+
+//========= CREATE PURCHASE ===========
+function successCreatedPurchase()
+{
+  Swal.fire(
+    'Listo!',
+    'Se efectuó la compra.',
+    'success'
+  )
+}
+
+function confirmationCreatePurchase()
+{
+  const form = document.querySelector('#create-purchase');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que deseas comprar este album?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00b012',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Comprar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  });
 }

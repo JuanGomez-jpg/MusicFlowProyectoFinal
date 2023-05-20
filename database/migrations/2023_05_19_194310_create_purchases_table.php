@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double('total', 8, 2);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('albums_id')->constrained();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

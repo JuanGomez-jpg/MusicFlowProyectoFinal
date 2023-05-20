@@ -28,7 +28,9 @@ Route::resource('albums', AlbumsController::class)->middleware('auth');
 Route::resource('shopping-cart', PurchaseController::class);
 
 Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase');
-Route::post('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'store'])->name('store-purchase');
+Route::post('shopping-cart/{album}/store-purchase', [PurchaseController::class, 'store'])->name('store-purchase');
+Route::delete('shopping-cart/{purchase}/delete-purchase', [PurchaseController::class, 'destroy'])->name('destroy-purchase');
+
 
 
 //Route::get('albums/create', [AlbumsController::class, 'create']);
