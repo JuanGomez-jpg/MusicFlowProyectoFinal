@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('description', 200);
             $table->double('price', 8, 2);
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

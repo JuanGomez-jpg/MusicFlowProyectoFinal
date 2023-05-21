@@ -6,12 +6,27 @@ function showSong(value)
     let songDuration = value.songDuration;
     let songLyrics = value.songLyrics;
 
-    var textoFormateado = songLyrics.replace(/[A-Z]/g, function(match) {
+    var textoFormateado;
+    var lineas;
+    var textoSinPrimeraLinea;
+
+    var regex = /^\w+$/;
+    var regexMay = /^[a-z\s]+$/;
+    if (regex.test(songLyrics)) 
+    {
+      console.log("entra");
+      textoSinPrimeraLinea = songLyrics;
+    }
+    else
+    {
+      textoFormateado = songLyrics.replace(/[A-Z]/g, function(match) {
         return '\n' + match;
       });
-    var lineas = textoFormateado.split('\n');
-    lineas.shift();
-    var textoSinPrimeraLinea = lineas.join('\n');
+      lineas = textoFormateado.split('\n');
+      lineas.shift();
+      textoSinPrimeraLinea = lineas.join('\n');
+    }
+
     Swal.fire({
         title: '<strong><pre><code>'+ songName + '</code></pre></strong>',
         text: 'Duración: ' + songDuration,

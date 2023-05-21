@@ -28,7 +28,7 @@
                     <div class="card shadow p-3 mb-5 bg-white rounded">
                         <div class="text-center">
                             <img src="{{ asset('storage/images/'. $al->coverImg) }}" class="mx-auto d-block img-fluid" style="height: auto; max-width: auto;" />
-                            <div class="card-body" style="height: 7rem;">
+                            <div class="card-body" style="height: 9rem;">
                                 <p>{{ $al->coverImg }}</p>
                                 <a href="{{ route('albums.download-cover', $al) }}" class="btn btn-success">Descargar</a>    
                             </div>

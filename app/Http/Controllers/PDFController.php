@@ -12,7 +12,8 @@ class PDFController extends Controller
         ini_set('max_execution_time', 500);
         $albums = Albums::all();
         $pdf = Pdf::loadView('albums.albums-report', compact('albums'));
-        return $pdf->download('albums-report.pdf');
+        return $pdf->setPaper('a4', 'landscape')->stream('albums-report.pdf');
+        //return $pdf->download('albums-report.pdf');
     }
 
 }

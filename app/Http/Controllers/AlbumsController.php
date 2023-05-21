@@ -177,7 +177,7 @@ class AlbumsController extends Controller
     public function destroy(Albums $album)
     {
         Gate::authorize('artist-albums');
-        $this->authorize('delete');
+        //$this->authorize('delete');
         $album -> delete();
         return redirect()->route('albums.index')->with('deleteAl', 'Ok');
     }
