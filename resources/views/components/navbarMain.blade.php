@@ -66,6 +66,14 @@
                     </ul>
                 </li>
 
+                <!-- Caratulas -->
+                <li class="nav-item mr-4">
+                    <a class="nav-link active" href="{{ route('albums.albums-covers') }}">
+                    <i class="bi bi-house-fill"></i>
+                        Caratulas
+                    </a>
+                </li>
+
 
                 <!-- Cuenta -->
                 <li class="nav-item dropdown mr-4">

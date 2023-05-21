@@ -6,6 +6,7 @@ use App\Models\Albums;
 use App\Models\Song;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
@@ -92,6 +93,10 @@ class AlbumsController extends Controller
             $filename = $request->coverImg->getClientOriginalName();
             $path = $request->file('coverImg')->storeAs('public/images', $filename);
             $albums->coverImg = $filename;
+
+            $route = Storage::url($path);
+            $albums->coverRoute = $route;
+            
         }
 
         $user = Auth::user();
@@ -151,7 +156,8 @@ class AlbumsController extends Controller
         {
             $filename = $request->coverImg->getClientOriginalName();
             $path = $request->file('coverImg')->storeAs('public/images', $filename);
-            $album->coverImg = $filename;
+            $albums->coverRoute = "path";
+            $albums->coverImg = $filename;
         }
 
         $album -> save();
@@ -164,7 +170,6 @@ class AlbumsController extends Controller
      */
     public function destroy(Albums $album)
     {
-        dd($album);
         Gate::authorize('artist-albums');
         $this->authorize('delete');
         $album -> delete();
@@ -183,5 +188,21 @@ class AlbumsController extends Controller
         Gate::authorize('artist-albums');
         $album->songs()->sync($request->song_id);
         return redirect()->route('albums.show', $album)->with('updateAlSon', 'Ok');
+    }
+
+
+    public function showCovers()
+    {
+        $albums = Albums::get();       
+        return response(view('albums.album-covers', compact('albums')));
+    }
+
+
+    public function downloadCover(Albums $album)
+    {
+        $path = Storage::path($album->coverImg);
+        $newPath = str_replace('\\', '/', $path);
+        $newPath = str_replace('/storage/app/', '/public/storage/images/', $newPath);
+        return response()->download($newPath);
     }
 }

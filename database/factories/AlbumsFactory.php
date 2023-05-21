@@ -24,13 +24,14 @@ class AlbumsFactory extends Factory
         $imageName = time() . '_' . Str::random(10) . '.jpg';
         $imageContent = file_get_contents($this->faker->imageUrl(500, 500));
         Storage::put('public/images/' . $imageName, $imageContent);
-
+        $route = storage_path('app/public/images/' . $imageName);
         return [
             'albumName' => $this->faker->word(),
             'artistName' => $this->faker->word(),
             'year' => $this->faker->numberBetween(1500, 2023),
             'genre' => $this->faker->word(),
             'coverImg' => $imageName,
+            'coverRoute' => $route,
             'description' => $this->faker->realText($maxNbChars = 100),
             'price' => $this->faker->randomFloat(2, 20, 30),
             'user_id' => '1'

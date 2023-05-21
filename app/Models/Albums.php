@@ -10,7 +10,7 @@ use App\Models\User;
 class Albums extends Model
 {
     use HasFactory;
-    protected $fillable = ['albumName', 'artistName',  'year', 'genre', 'coverImg', 'description', 'price', 'user_id'];
+    protected $fillable = ['albumName', 'artistName',  'year', 'genre', 'coverImg', 'coverRoute', 'description', 'price', 'user_id'];
     //protected $guarded = ['id'];
     public $timestamps = false;
 

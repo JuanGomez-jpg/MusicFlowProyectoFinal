@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('year');
             $table->string('genre', 50);
             $table->string('coverImg');
-            //$table->binary('coverName');
+            $table->string('coverRoute');
             $table->string('artistName', 50);
             $table->longText('description', 200);
             $table->double('price', 8, 2);

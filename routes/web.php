@@ -48,7 +48,10 @@ Route::redirect('/', 'login');
 ///////////////////////////////
 
 
-Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
+Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song')->middleware(['auth', 'verified']);
+Route::get('albums/albums-covers', [AlbumsController::class, 'showCovers'])->name('albums.albums-covers')->middleware(['auth', 'verified']);
+Route::get('albums/download-cover/{album}', [AlbumsController::class, 'downloadCover'])->name('albums.download-cover')->middleware(['auth', 'verified']);
+
 Route::resource('songs', SongController::class)->middleware(['auth', 'verified']);
 Route::resource('albums', AlbumsController::class)->middleware(['auth', 'verified']);
 
