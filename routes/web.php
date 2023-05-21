@@ -49,10 +49,10 @@ Route::redirect('/', 'login');
 
 
 Route::post('albums/{album}/add-song', [AlbumsController::class, 'addSong'])->name('albums.add-song');
-Route::resource('songs', SongController::class)->middleware('verified');
-Route::resource('albums', AlbumsController::class)->middleware('verified');
+Route::resource('songs', SongController::class)->middleware(['auth', 'verified']);
+Route::resource('albums', AlbumsController::class)->middleware(['auth', 'verified']);
 
-Route::resource('shopping-cart', PurchaseController::class)->middleware('verified');
+Route::resource('shopping-cart', PurchaseController::class)->middleware(['auth', 'verified']);
 
 Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase');
 Route::post('shopping-cart/{album}/store-purchase', [PurchaseController::class, 'store'])->name('store-purchase');

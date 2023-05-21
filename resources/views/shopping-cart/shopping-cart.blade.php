@@ -19,7 +19,7 @@
                 @foreach ($purchases as $purchase)
                     <div class="card mb-4">
                         <div class="card-header justify-content-between py-3">
-                            <h5 class="mb-0">Fecha de compra:</h5>
+                            <h5 class="mb-0">Fecha de compra: {{ $purchase['purchase']-> purchaseDate}}</h5>
                             <br>
                             <form action="{{ route('destroy-purchase', $purchase['purchase']->id) }}" id="" method="POST" class="">
                                 @csrf

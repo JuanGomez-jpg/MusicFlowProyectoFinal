@@ -25,14 +25,20 @@ class PurchaseController extends Controller
         ->select('albums.*')
         ->distinct()
         ->get();
-        $purchasesUser = Auth::user()->purchases; // Obtengo las compras
-        $count = count($purchasesUser); // Longitud del arreglo
+
+        $purchasesUser = Purchase::with('user')->get();
+        //$purchasesUser = Auth::user()->purchases; // Obtengo las compras
+        $countPurchase = count($purchasesUser); // Longitud del arreglo
+        $countAlbums = count($albums);
         $purchases = []; // Nuevo arreglo
 
-        for ($i = 0; $i < $count; $i++) {
-            $valor1 = $purchasesUser[$i];
-            $valor2 = $albums[$i];
-            $purchases[] = ['purchase' => $valor1, 'album' => $valor2];
+        if ($countAlbums)
+        {
+            for ($i = 0; $i < $countAlbums; $i++) {
+                $valor1 = $purchasesUser[$i];
+                $valor2 = $albums[$i];
+                $purchases[] = ['purchase' => $valor1, 'album' => $valor2];
+            }
         }
         return response(view('shopping-cart.shopping-cart', compact('purchases')));
     }
@@ -53,9 +59,9 @@ class PurchaseController extends Controller
         //Validation storage
         $request->validate([
             'cardHolder' => 'required|min:5|max:70',
-            'cardNumber' => 'required|min:16|max:16',
+            'cardNumber' => 'required|integer',
             'cardExp' => 'required|min:7|max:7',
-            'CVV' => 'required|min:3|max:3',
+            'CVV' => 'required|integer',
         ]);
         
         // Storage
@@ -66,7 +72,7 @@ class PurchaseController extends Controller
         $purchase->CVV = $request->CVV;
 
         $fechaActual = Carbon::now();
-        $fechaFormateada = $fechaActual->format('Y-m-d');
+        $fechaFormateada = $fechaActual->format('d-m-Y');
         $purchase->purchaseDate = $fechaFormateada;
 
         $user = Auth::user();
