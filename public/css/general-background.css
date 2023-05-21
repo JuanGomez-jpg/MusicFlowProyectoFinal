@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap');
+
+
 
 body
 {
     font-family: 'Inter', sans-serif;
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(230, 237, 255), rgb(255, 230, 230));
+    background: linear-gradient(to right, rgb(226, 234, 255), rgb(255, 230, 230));
 }

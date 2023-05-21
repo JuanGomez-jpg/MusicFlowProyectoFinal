@@ -14,7 +14,6 @@ function showSong(value)
     var regexMay = /^[a-z\s]+$/;
     if (regex.test(songLyrics)) 
     {
-      console.log("entra");
       textoSinPrimeraLinea = songLyrics;
     }
     else
@@ -317,3 +316,4 @@ function confirmationCreatePurchase()
     })
   });
 }
+
