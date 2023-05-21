@@ -55,6 +55,11 @@ class AlbumsPolicy
         //
     }
 
+    public function hasSongs(User $user, Albums $albums): bool
+    {
+        return $albums->songs->count() != 0;
+    }
+
     /**
      * Determine whether the user can permanently delete the model.
      */

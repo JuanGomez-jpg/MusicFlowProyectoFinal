@@ -8,6 +8,7 @@ use App\Models\Albums;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PurchaseController extends Controller
 {
@@ -16,6 +17,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
+        Gate::authorize('purchases');
         $user = Auth::user();
         $userId = $user->id;
         $albums = DB::table('albums') // Obtengo los albums de las compras asociadas con los albums y las purchases no borradas con softdeletes
@@ -48,6 +50,7 @@ class PurchaseController extends Controller
      */
     public function create(Albums $album)
     {
+        Gate::authorize('purchases');
         return view('shopping-cart.create-shopping-cart', compact('album'));
     }
 
@@ -56,6 +59,7 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('purchases');
         //Validation storage
         $request->validate([
             'cardHolder' => 'required|min:5|max:70',
@@ -114,6 +118,7 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
+        Gate::authorize('purchases');
         $purchase->delete();
         return redirect()->route('albums.index')->with('deletePurchase', 'Ok');
     }

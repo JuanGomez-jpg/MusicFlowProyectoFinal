@@ -47,7 +47,11 @@ class AlbumsController extends Controller
                         ->where('user_id', $user_id);
                 })
                 ->get();
-            
+            /*$albums = DB::table('albums')
+                ->join('albums_song', 'albums.id', '=', 'albums_song.albums_id')
+                ->where('albums_song.user_id', $userId)
+                ->select('albums.*')
+                ->get();*/
             return response(view('albums.album', compact('albums','user')));
         }
 
@@ -156,8 +160,10 @@ class AlbumsController extends Controller
         {
             $filename = $request->coverImg->getClientOriginalName();
             $path = $request->file('coverImg')->storeAs('public/images', $filename);
-            $albums->coverRoute = "path";
-            $albums->coverImg = $filename;
+            $album->coverImg = $filename;
+
+            $route = Storage::url($path);
+            $album->coverRoute = $route;
         }
 
         $album -> save();

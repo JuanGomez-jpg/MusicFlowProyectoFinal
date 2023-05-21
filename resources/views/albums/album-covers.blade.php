@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general-background.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -27,7 +28,8 @@
                     <div class="card shadow p-3 mb-5 bg-white rounded">
                         <div class="text-center">
                             <img src="{{ asset('storage/images/'. $al->coverImg) }}" class="mx-auto d-block img-fluid" style="height: auto; max-width: auto;" />
-                            <div class="card-body" style="">
+                            <div class="card-body" style="height: 7rem;">
+                                <p>{{ $al->coverImg }}</p>
                                 <a href="{{ route('albums.download-cover', $al) }}" class="btn btn-success">Descargar</a>    
                             </div>
                         </div>

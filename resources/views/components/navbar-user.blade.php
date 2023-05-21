@@ -54,9 +54,6 @@
                             </a>
                             </form>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="">Ajustes</a>
-                        </li>
                     </ul>
                 </li>
 

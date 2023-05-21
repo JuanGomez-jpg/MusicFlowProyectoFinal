@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
  
@@ -57,11 +58,11 @@ Route::resource('albums', AlbumsController::class)->middleware(['auth', 'verifie
 
 Route::resource('shopping-cart', PurchaseController::class)->middleware(['auth', 'verified']);
 
-Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase');
-Route::post('shopping-cart/{album}/store-purchase', [PurchaseController::class, 'store'])->name('store-purchase');
-Route::delete('shopping-cart/{purchase}/delete-purchase', [PurchaseController::class, 'destroy'])->name('destroy-purchase');
+Route::get('shopping-cart/{album}/add-purchase', [PurchaseController::class, 'create'])->name('add-purchase')->middleware(['auth', 'verified']);;
+Route::post('shopping-cart/{album}/store-purchase', [PurchaseController::class, 'store'])->name('store-purchase')->middleware(['auth', 'verified']);;
+Route::delete('shopping-cart/{purchase}/delete-purchase', [PurchaseController::class, 'destroy'])->name('destroy-purchase')->middleware(['auth', 'verified']);;
 
-
+Route::get('/pdf',[PDFController::class, 'PDF'])->name('downloadPDF');
 
 //Route::get('albums/create', [AlbumsController::class, 'create']);
 //Route::get('albums', [AlbumsController::class, 'index']);

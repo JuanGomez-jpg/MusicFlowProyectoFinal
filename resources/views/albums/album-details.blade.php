@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/alerts.js') }}"></script>
     <!-- Select2 CDN -->
+    <link href="{{ asset('css/general-background.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -35,9 +36,15 @@
         <img src="{{ asset('storage/images/'.$album->coverImg) }}" class="mx-auto d-block img-fluid rounded" style="height: auto; max-width: auto;">
         
         @if($user -> typeUser !== 'Artista')
-          <div class="mt-3">
-            <a href="{{ route('add-purchase', $album) }}" class="btn btn-info w-100">Comprar</a>
-          </div>
+          @can('hasSongs', $album)
+            <div class="mt-3">
+              <a href="{{ route('add-purchase', $album) }}" class="btn btn-info w-100">Comprar</a>
+            </div>
+          @else
+            <div class="mt-3">
+              <p>No tiene canciones</p>
+            </div>
+          @endcan
         @endif
         
         <div class="mt-3">

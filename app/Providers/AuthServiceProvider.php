@@ -36,5 +36,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('artist-songs', function(User $user) {
             return $user->typeUser == 'Artista';
         });
+
+        Gate::define('purchases', function(User $user) {
+            return $user->typeUser == 'Normal';
+        });
     }
 }
